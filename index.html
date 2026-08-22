@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi-Fi Hopes — Vintage Receiver Restoration</title>
+<meta name="description" content="Hi-Fi Hopes restores silverface-era receivers — Marantz, Sansui, Kenwood — back to original spec. Portfolio and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2b1b12;
+    --walnut-deep:#1c110b;
+    --panel:#232120;
+    --aluminum:#c9c4b8;
+    --aluminum-dim:#8f8a7e;
+    --glow:#e8a33d;
+    --glow-dim:#a9762c;
+    --signal:#c4432b;
+    --paper:#f2ede1;
+    --line: rgba(201,196,184,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--walnut);
+    color:var(--aluminum);
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    line-height:1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;}
+
+  .label{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-size:0.72rem;
+    color:var(--glow);
+  }
+
+  :focus-visible{
+    outline:2px solid var(--glow);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:20;
+    background:var(--walnut-deep);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    max-width:1100px; margin:0 auto;
+    padding:1rem 1.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .wordmark{
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    letter-spacing:0.08em;
+    font-size:1.05rem;
+    color:var(--paper);
+    text-decoration:none;
+  }
+  .wordmark span{color:var(--glow);}
+  nav ul{
+    list-style:none; display:flex; gap:1.75rem;
+  }
+  nav a{
+    font-family:'Oswald', sans-serif;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--aluminum-dim);
+    transition:color 0.2s ease;
+  }
+  nav a:hover{color:var(--glow);}
+
+  /* ---------- HERO / FACEPLATE ---------- */
+  .faceplate{
+    max-width:1100px; margin:2.5rem auto 0;
+    padding:0 1.5rem;
+  }
+  .panel{
+    background:linear-gradient(180deg, #2a2725, #1e1c1b);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 40px -20px rgba(0,0,0,0.6);
+    padding:3rem 2rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .panel::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 44px);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap:2.5rem;
+    align-items:center;
+    position:relative;
+  }
+  @media (max-width:800px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 4.5vw, 3.1rem);
+    font-weight:700;
+    color:var(--paper);
+    line-height:1.08;
+    margin:0.6rem 0 1rem;
+  }
+  .hero p{
+    color:var(--aluminum-dim);
+    font-size:1.02rem;
+    max-width:42ch;
+  }
+  .hero .cta-row{
+    margin-top:1.75rem;
+    display:flex; gap:1rem; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.78rem;
+    padding:0.85rem 1.5rem;
+    border-radius:3px;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary{
+    background:var(--glow);
+    color:var(--walnut-deep);
+  }
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 20px -8px rgba(232,163,61,0.6);}
+  .btn-ghost{
+    border:1px solid var(--line);
+    color:var(--aluminum);
+  }
+  .btn-ghost:hover{border-color:var(--glow); color:var(--glow);}
+
+  /* VU meter signature element */
+  .vu{
+    background:radial-gradient(120% 140% at 50% 120%, #0e0d0c 0%, #050504 70%);
+    border:1px solid rgba(0,0,0,0.6);
+    border-radius:8px;
+    padding:1.5rem 1.5rem 1rem;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+  }
+  .vu-face{
+    position:relative;
+    aspect-ratio: 16/10;
+    background: radial-gradient(120% 100% at 50% 0%, #f4ecd8 0%, #e3d6b3 60%, #d8c89e 100%);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .vu-arc{
+    position:absolute; inset:0;
+  }
+  .vu-needle{
+    position:absolute;
+    bottom:2px; left:50%;
+    width:2px; height:74%;
+    background:var(--signal);
+    transform-origin:bottom center;
+    transform:translateX(-50%) rotate(-32deg);
+    animation: sweep 3.2s ease-in-out infinite;
+    box-shadow:0 0 6px rgba(196,67,43,0.5);
+  }
+  @keyframes sweep{
+    0%,100%{transform:translateX(-50%) rotate(-32deg);}
+    50%{transform:translateX(-50%) rotate(18deg);}
+  }
+  .vu-pivot{
+    position:absolute; bottom:0; left:50%; width:10px; height:10px;
+    background:#2a2620; border-radius:50%; transform:translate(-50%,50%);
+  }
+  .vu-scale{
+    position:absolute; top:14%; left:8%; right:8%;
+    display:flex; justify-content:space-between;
+    font-family:'Oswald', sans-serif;
+    font-size:0.6rem; color:#5b4f38; letter-spacing:0.02em;
+  }
+  .vu-caption{
+    font-family:'Oswald', sans-serif;
+    font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--aluminum-dim);
+    text-align:center; margin-top:0.85rem;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    max-width:1100px; margin:0 auto;
+    padding:5rem 1.5rem;
+  }
+  .section-head{
+    display:flex; align-items:baseline; gap:1rem;
+    margin-bottom:2.5rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:1rem;
+  }
+  .section-head h2{
+    font-size:1.6rem;
+    color:var(--paper);
+    font-weight:600;
+  }
+
+  /* Restoration cards, labeled by model like a catalog */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:1.5rem;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:5px;
+    overflow:hidden;
+    transition:transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover{transform:translateY(-4px); border-color:var(--glow-dim);}
+  .card-plate{
+    aspect-ratio:4/3;
+    background:
+      linear-gradient(135deg, rgba(232,163,61,0.07), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 10px),
+      linear-gradient(180deg,#3a352f,#221f1c);
+    display:flex; align-items:center; justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .card-plate span{
+    font-family:'Oswald', sans-serif;
+    color:var(--aluminum-dim);
+    letter-spacing:0.1em;
+    font-size:0.72rem;
+  }
+  .card-body{padding:1.25rem 1.3rem 1.5rem;}
+  .card-model{
+    font-family:'Oswald', sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    color:var(--glow);
+    text-transform:uppercase;
+    margin-bottom:0.4rem;
+  }
+  .card-body h3{
+    color:var(--paper);
+    font-size:1.1rem;
+    margin-bottom:0.5rem;
+    font-weight:600;
+  }
+  .card-body p{
+    color:var(--aluminum-dim);
+    font-size:0.92rem;
+  }
+  .card-tags{
+    margin-top:0.9rem;
+    display:flex; gap:0.5rem; flex-wrap:wrap;
+  }
+  .tag{
+    font-family:'Oswald', sans-serif;
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border:1px solid var(--line);
+    color:var(--aluminum-dim);
+    padding:0.25rem 0.55rem;
+    border-radius:2px;
+  }
+
+  /* About */
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:3rem;
+  }
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--aluminum-dim); margin-bottom:1rem;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .about-photo{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:5px;
+    aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-photo span{
+    font-family:'Oswald', sans-serif;
+    color:var(--aluminum-dim);
+    font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
+  }
+
+  /* Contact styled as a spec sheet */
+  .spec-sheet{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:2rem;
+  }
+  .spec-row{
+    display:flex; justify-content:space-between; gap:1rem;
+    padding:0.9rem 0;
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-key{
+    font-family:'Oswald', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--aluminum-dim);
+  }
+  .spec-val{
+    font-size:0.98rem;
+    color:var(--paper);
+  }
+  .spec-val a{
+    color:var(--glow);
+    text-decoration:none;
+    border-bottom:1px solid var(--glow-dim);
+  }
+  .spec-val a:hover{border-color:var(--glow);}
+
+  footer{
+    text-align:center;
+    padding:2.5rem 1.5rem 3rem;
+    color:var(--aluminum-dim);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#top" class="wordmark">HI-FI <span>HOPES</span></a>
+    <nav>
+      <ul>
+        <li><a href="#work">Restorations</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="faceplate">
+    <div class="panel">
+      <div class="hero-grid">
+        <div class="hero">
+          <p class="label">Silverface Restoration &amp; Resale</p>
+          <h1>Vintage receivers, brought back to spec.</h1>
+          <p>Hi-Fi Hopes restores 1970s-era Marantz, Sansui, Kenwood, and Pioneer receivers &mdash; bias and offset adjustment, LED replacement, recapping, and full fault diagnosis &mdash; then finds them a good next home.</p>
+          <div class="cta-row">
+            <a href="#work" class="btn btn-primary">See the work</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+        <div class="vu" aria-hidden="true">
+          <div class="vu-face">
+            <div class="vu-scale">
+              <span>-20</span><span>-10</span><span>-3</span><span>0</span><span>+3</span>
+            </div>
+            <div class="vu-needle"></div>
+            <div class="vu-pivot"></div>
+          </div>
+          <p class="vu-caption">Signal restored</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="section-head">
+      <h2>Recent Restorations</h2>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Marantz 2238B</p>
+          <h3>Full service &amp; resale</h3>
+          <p>Bias and offset dialed in, warm-white LED dial replacement, full recap, contacts cleaned. Sold within original spec after market research.</p>
+          <div class="card-tags">
+            <span class="tag">Recap</span>
+            <span class="tag">LED swap</span>
+            <span class="tag">Sold</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Sansui 7070</p>
+          <h3>Power supply &amp; recap</h3>
+          <p>Power supply filter capacitors replaced, navigating Sansui-specific polarity quirks. Full restoration in progress.</p>
+          <div class="card-tags">
+            <span class="tag">Recap</span>
+            <span class="tag">In progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Sansui 2000X</p>
+          <h3>Channel fault diagnosis</h3>
+          <p>Diagnosing a left-channel failure as part of a paired restoration alongside the 7070.</p>
+          <div class="card-tags">
+            <span class="tag">Diagnosis</span>
+            <span class="tag">In progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Kenwood Eleven III</p>
+          <h3>Flagship curbside find</h3>
+          <p>Sourced alongside a Kenwood KX-1030. A flagship-class unit worth well above initial estimate &mdash; restoration underway.</p>
+          <div class="card-tags">
+            <span class="tag">Flagship</span>
+            <span class="tag">In progress</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Marantz 2285B</p>
+          <h3>Under evaluation</h3>
+          <p>Assessing as the next flip candidate, with pre/main jumper testing to isolate preamp vs. amp section faults.</p>
+          <div class="card-tags">
+            <span class="tag">Evaluation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-plate"><span>Photo coming soon</span></div>
+        <div class="card-body">
+          <p class="card-model">Sansui 881</p>
+          <h3>Queued for service</h3>
+          <p>Next in the restoration queue, sharing meter light grommets and bulbs with other units in the shop.</p>
+          <div class="card-tags">
+            <span class="tag">Queued</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>About the shop</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Hi-Fi Hopes is a one-person restoration shop working out of Paulding, Ohio, focused on silverface-era receivers from Marantz, Sansui, Pioneer, Kenwood, and Yamaha.</p>
+        <p>Every unit gets the same treatment: bias and offset verified against spec, failing capacitors replaced, dial lighting restored with warm-white LEDs, and contacts cleaned before anything goes back together. Nothing leaves the bench until it measures right.</p>
+        <p>Hi-Fi Hopes, LLC is registered in Ohio.</p>
+      </div>
+      <div class="about-photo"><span>Workbench photo coming soon</span></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <h2>Contact</h2>
+    </div>
+    <div class="spec-sheet">
+      <div class="spec-row">
+        <span class="spec-key">Shop</span>
+        <span class="spec-val">Hi-Fi Hopes, LLC</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Location</span>
+        <span class="spec-val">Paulding, Ohio</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Email</span>
+        <span class="spec-val"><a href="mailto:hello@hifihopes.com">hello@hifihopes.com</a></span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-key">Marketplaces</span>
+        <span class="spec-val">eBay &middot; Facebook Marketplace &middot; US Audio Mart</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; <span id="year"></span> Hi-Fi Hopes, LLC &mdash; Paulding, Ohio
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
