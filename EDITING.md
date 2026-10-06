@@ -68,11 +68,19 @@ Copy a whole block from `{` to `},` and paste it below. Change the `id`
 1. On the repo's main page, click into the `images` folder
 2. **Add file → Upload files**, then drag your photos in
 3. Name them simply, like `sansui-7070.jpg` (lowercase, no spaces)
-4. In `site-data.js`, set `photo: "images/sansui-7070.jpg"`
+4. In `site-data.js`, list them in the unit's `photos`. The first one is the main picture:
+   ```js
+   photos: [
+     "images/sansui-7070-front.jpg",
+     "images/sansui-7070-inside.jpg"
+   ],
+   ```
+   Tapping the picture on the site opens all of them as a gallery.
 
 Tips:
 - Shoot from the front, at faceplate height, with the dial lamps on
 - Resize to about 1600px wide before uploading (phone photos are huge and slow the site)
+- Phone photos can carry your GPS location. Resizing with most apps strips it; or send them to Claude to prep
 - Until a unit has a photo, the site shows a brushed-aluminum nameplate instead
 
 For the About section, upload a bench photo and set `aboutPhoto: "images/bench.jpg"`.

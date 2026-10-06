@@ -25,6 +25,7 @@
   "name": "Hi-Fi Hopes, LLC",
   "url": "https://hifihopes.com/",
   "email": "dan@hifihopes.com",
+  "telephone": "+1-419-669-6277",
   "description": "Vintage receiver repair, restoration and sales.",
   "image": "https://hifihopes.com/og-image.png",
   "address": {
@@ -303,6 +304,26 @@
   .status.is-bench{color:var(--glow);}
   .status.is-sold{color:var(--aluminum-dim);}
 
+  .photo-btn{all:unset; display:block; position:absolute; inset:0; cursor:zoom-in;}
+  .photo-btn:focus-visible{outline:2px solid var(--glow); outline-offset:-3px;}
+  .photo-count{
+    position:absolute; bottom:0.75rem; right:0.75rem; pointer-events:none;
+    font-family:var(--f-display); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.3rem 0.55rem; border-radius:2px; background:rgba(15,10,7,.82); color:var(--paper);
+  }
+
+  .lightbox{
+    border:none; padding:0; background:transparent; max-width:min(1100px, 96vw); width:100%;
+    color:var(--paper);
+  }
+  .lightbox::backdrop{background:rgba(10,6,4,.92);}
+  .lb-inner{display:grid; gap:0.75rem;}
+  .lb-img{width:100%; max-height:78vh; object-fit:contain; background:#0d0907; border-radius:4px;}
+  .lb-bar{display:flex; align-items:center; justify-content:space-between; gap:0.75rem; flex-wrap:wrap;}
+  .lb-title{font-family:var(--f-display); letter-spacing:0.1em; text-transform:uppercase; font-size:0.85rem;}
+  .lb-count{color:var(--aluminum-dim); font-variant-numeric:tabular-nums; margin-left:0.6rem;}
+  .lb-ctrls{display:flex; gap:0.5rem;}
+
   .card-body{padding:1.2rem 1.25rem 1.35rem; display:flex; flex-direction:column; gap:0.6rem; flex:1;}
   .card-model{font-family:var(--f-display); font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--glow);}
   .card-body h3{font-size:1.18rem; font-weight:600;}
@@ -340,7 +361,11 @@
   .past li{
     display:grid; grid-template-columns:auto 1fr; gap:0.25rem 1rem; align-items:baseline;
     padding:1rem 1.1rem; border:1px solid var(--line); border-radius:4px; background:var(--panel);
+    overflow:hidden;
   }
+  .past .pimg{grid-column:1 / -1; margin:-1rem -1.1rem 0.6rem; aspect-ratio:2/1; max-width:none; overflow:hidden; border-bottom:1px solid var(--line); position:relative;}
+  .past li{align-content:start;}
+  .past .pimg img{width:100%; height:100%; object-fit:cover;}
   .past .pm{font-family:var(--f-display); letter-spacing:0.08em; color:var(--paper); font-size:1.05rem; white-space:nowrap;}
   .past .ps{font-family:var(--f-display); font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--aluminum-dim); justify-self:end;}
   .past p{grid-column:1 / -1; color:var(--aluminum-dim); font-size:0.94rem;}
@@ -528,7 +553,7 @@
     <div id="for-sale"></div>
 
     <h3 class="subhead" id="bench-head">On the bench</h3>
-    <div class="grid grid-tight" id="bench"></div>
+    <div class="grid" id="bench"></div>
   </section>
 
   <!-- REPAIRS -->
@@ -673,6 +698,20 @@
 
 </main>
 
+<dialog class="lightbox" id="lightbox" aria-label="Photos">
+  <div class="lb-inner">
+    <img class="lb-img" id="lb-img" alt="">
+    <div class="lb-bar">
+      <p><span class="lb-title" id="lb-title"></span><span class="lb-count" id="lb-count"></span></p>
+      <div class="lb-ctrls">
+        <button class="btn btn-ghost btn-sm" type="button" id="lb-prev">Prev</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="lb-next">Next</button>
+        <button class="btn btn-primary btn-sm" type="button" id="lb-close">Close</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <footer>
   <div class="wrap foot">
     <span>&copy; <span id="year">2026</span> Hi-Fi Hopes, LLC · Paulding, Ohio</span>
@@ -706,10 +745,22 @@
   function telHref(p){ return "tel:" + String(p).replace(/[^\d+]/g, ""); }
   function unitName(u){ return u.brand + " " + u.model; }
 
+  function photosOf(u){
+    var list = (u.photos && u.photos.length) ? u.photos.slice() : [];
+    if (u.photo && list.indexOf(u.photo) < 0) list.unshift(u.photo);
+    return list;
+  }
+
   function photoBlock(u, statusClass, statusText){
-    var inner = u.photo
-      ? '<img src="' + esc(u.photo) + '" alt="' + esc(unitName(u)) + '" loading="lazy">'
-      : '<div class="nameplate" aria-hidden="true"><span class="np-brand">' + esc(u.brand) + '</span><span class="np-model">' + esc(u.model) + '</span><span class="np-lamp"></span></div>';
+    var pics = photosOf(u);
+    var inner;
+    if (pics.length){
+      inner = '<img src="' + esc(pics[0]) + '" alt="' + esc(unitName(u)) + '" loading="lazy">' +
+        '<button class="photo-btn" type="button" data-gallery="' + esc(u.id) + '" aria-label="View photos of the ' + esc(unitName(u)) + '"></button>' +
+        (pics.length > 1 ? '<span class="photo-count">' + pics.length + ' photos</span>' : '');
+    } else {
+      inner = '<div class="nameplate" aria-hidden="true"><span class="np-brand">' + esc(u.brand) + '</span><span class="np-model">' + esc(u.model) + '</span><span class="np-lamp"></span></div>';
+    }
     return '<div class="card-photo">' + inner + '<span class="status ' + statusClass + '">' + statusText + '</span></div>';
   }
 
@@ -776,7 +827,11 @@
   var pastEl = document.getElementById("past-list");
   if (sold.length){
     pastEl.innerHTML = sold.map(function(u){
-      return '<li><span class="pm">' + esc(unitName(u)) + '</span><span class="ps">Sold</span><p>' + esc(u.summary) + '</p></li>';
+      var pics = photosOf(u);
+      var img = '<div class="pimg">' + (pics.length
+        ? '<img src="' + esc(pics[0]) + '" alt="' + esc(unitName(u)) + '" loading="lazy">'
+        : '<div class="nameplate" aria-hidden="true"><span class="np-brand">' + esc(u.brand) + '</span><span class="np-model">' + esc(u.model) + '</span><span class="np-lamp"></span></div>') + '</div>';
+      return '<li>' + img + '<span class="pm">' + esc(unitName(u)) + '</span><span class="ps">Sold</span><p>' + esc(u.summary) + '</p></li>';
     }).join("");
   } else {
     document.getElementById("past").hidden = true;
@@ -901,6 +956,42 @@
         navigator.clipboard.writeText(ta.value).then(done, function(){ ta.select(); });
       } else { ta.select(); }
     });
+  });
+
+  /* ---------- photo gallery ---------- */
+  var lb = document.getElementById("lightbox");
+  var lbImg = document.getElementById("lb-img");
+  var lbTitle = document.getElementById("lb-title");
+  var lbCount = document.getElementById("lb-count");
+  var lbPrev = document.getElementById("lb-prev");
+  var lbNext = document.getElementById("lb-next");
+  var gal = {pics:[], i:0, name:""};
+
+  function showPic(){
+    lbImg.src = gal.pics[gal.i];
+    lbImg.alt = gal.name + ", photo " + (gal.i + 1);
+    lbCount.textContent = (gal.i + 1) + " / " + gal.pics.length;
+    lbPrev.hidden = lbNext.hidden = gal.pics.length < 2;
+  }
+  function step(d){ gal.i = (gal.i + d + gal.pics.length) % gal.pics.length; showPic(); }
+
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest("[data-gallery]") : null;
+    if (!btn) return;
+    var u = units.filter(function(x){ return x.id === btn.getAttribute("data-gallery"); })[0];
+    if (!u) return;
+    gal = {pics:photosOf(u), i:0, name:unitName(u)};
+    lbTitle.textContent = gal.name;
+    showPic();
+    if (lb.showModal) lb.showModal(); else window.open(gal.pics[0], "_blank");
+  });
+  lbPrev.addEventListener("click", function(){ step(-1); });
+  lbNext.addEventListener("click", function(){ step(1); });
+  document.getElementById("lb-close").addEventListener("click", function(){ lb.close(); });
+  lb.addEventListener("click", function(e){ if (e.target === lb) lb.close(); });
+  lb.addEventListener("keydown", function(e){
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
   });
 
   /* ---------- mobile nav ---------- */
