@@ -12,7 +12,7 @@ window.HFH = {
     email: "dan@hifihopes.com",
 
     // Google Voice number, like "(419) 555-0123". Leave "" to hide it.
-    phone: "",
+    phone: "(419) 669-6277",
 
     // Link to your Google reviews. Leave "" to hide the reviews link.
     reviewsUrl: "",
@@ -23,7 +23,7 @@ window.HFH = {
 
     // Photo of your bench for the About section, like "images/bench.jpg".
     // Leave "" to hide the photo box.
-    aboutPhoto: "",
+    aboutPhoto: "images/bench.jpg",
 
     // Your store pages. Paste the link to make the name clickable.
     marketplaces: [
@@ -53,10 +53,28 @@ window.HFH = {
      buyLink:      Stripe Payment Link for the full price. "" to hide.
      depositLink:  Stripe Payment Link for a deposit. "" to hide.
      deposit:      deposit amount, like 100.
-     photo:        like "images/sansui-7070.jpg". "" shows a nameplate instead.
+     photos:       list of photos, first one is the main picture:
+                   ["images/one.jpg", "images/two.jpg"]
+                   Leave as [] to show a nameplate instead.
      service:      the service sheet, one line per item of work.
   ------------------------------------------- */
   units: [
+    {
+      id: "pioneer-sa-9500ii",
+      brand: "Pioneer",
+      model: "SA-9500II",
+      status: "bench",
+      headline: "Integrated amplifier, final checks",
+      summary: "Pioneer's top integrated amp of its series. Ask for first call before it's listed.",
+      price: null, buyLink: "", depositLink: "", deposit: null,
+      photos: [
+        "images/pioneer-sa-9500ii-front.jpg",
+        "images/pioneer-sa-9500ii-left.jpg",
+        "images/pioneer-sa-9500ii-right.jpg",
+        "images/pioneer-sa-9500ii-detail.jpg"
+      ],
+      service: []
+    },
     {
       id: "kenwood-eleven-iii",
       brand: "Kenwood",
@@ -65,7 +83,7 @@ window.HFH = {
       headline: "Kenwood's flagship receiver, full service underway",
       summary: "A top-of-the-line Kenwood found locally. Full service and alignment in progress.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: ["images/kenwood-eleven-iii.jpg"],
       service: []
     },
     {
@@ -76,7 +94,7 @@ window.HFH = {
       headline: "Power supply rebuild and recap",
       summary: "Main filter capacitors replaced. Remaining electrolytics screened and replaced as needed, then bias and offset alignment.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: [],
       service: [
         "Main filter capacitors: Nichicon 80V 10,000µF, replaced"
       ]
@@ -89,7 +107,7 @@ window.HFH = {
       headline: "Left channel fault diagnosis",
       summary: "Tracing a dead left channel before full service.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: [],
       service: []
     },
     {
@@ -100,7 +118,7 @@ window.HFH = {
       headline: "Queued for full service",
       summary: "Next on the bench for a full service and dial lamp conversion.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: [],
       service: []
     },
     {
@@ -111,7 +129,7 @@ window.HFH = {
       headline: "Full service",
       summary: "Bias and offset set to spec, warm-white LED dial lighting, recap, contacts cleaned.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: [],
       service: []
     },
     {
@@ -122,7 +140,7 @@ window.HFH = {
       headline: "Sold locally",
       summary: "Went to a local buyer in October 2026.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: ["images/marantz-2285b.jpg"],
       service: []
     },
     {
@@ -133,7 +151,7 @@ window.HFH = {
       headline: "Sold locally",
       summary: "Went to a local buyer in October 2026.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photo: "",
+      photos: ["images/mcs-3253.jpg"],
       service: []
     }
   ],
