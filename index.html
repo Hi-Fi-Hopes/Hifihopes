@@ -2,357 +2,444 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hi-Fi Hopes — Vintage Receiver Restoration</title>
-<meta name="description" content="Hi-Fi Hopes restores silverface-era receivers — Marantz, Sansui, Kenwood — back to original spec. Portfolio and contact.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Hi-Fi Hopes · Vintage Receiver Repair &amp; Restoration · Paulding, Ohio</title>
+<meta name="description" content="Restored 1970s Marantz, Sansui, Pioneer, Kenwood and Yamaha receivers for sale, plus vintage receiver repair in Paulding, Ohio. Every unit ships with a service sheet.">
+<link rel="canonical" href="https://hifihopes.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1c110b">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hifihopes.com/">
+<meta property="og:title" content="Hi-Fi Hopes · Vintage Receiver Repair &amp; Restoration">
+<meta property="og:description" content="Restored silverface-era receivers for sale and vintage receiver repair in Paulding, Ohio.">
+<meta property="og:image" content="https://hifihopes.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Hi-Fi Hopes, LLC",
+  "url": "https://hifihopes.com/",
+  "email": "dan@hifihopes.com",
+  "description": "Vintage receiver repair, restoration and sales.",
+  "image": "https://hifihopes.com/og-image.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Paulding",
+    "addressRegion": "OH",
+    "addressCountry": "US"
+  },
+  "areaServed": "Northwest Ohio",
+  "knowsLanguage": ["en", "es"]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
+  /* Layout: a receiver faceplate. Walnut case, brushed-aluminum panels,
+     amber dial glow for anything you can press. One column on phones. */
   :root{
     --walnut:#2b1b12;
     --walnut-deep:#1c110b;
-    --panel:#232120;
-    --aluminum:#c9c4b8;
-    --aluminum-dim:#8f8a7e;
+    --panel:#24211f;
+    --panel-hi:#2d2926;
+    --aluminum:#d3cec2;
+    --aluminum-dim:#9b958a;
     --glow:#e8a33d;
     --glow-dim:#a9762c;
-    --signal:#c4432b;
+    --signal:#d0533a;
     --paper:#f2ede1;
-    --line: rgba(201,196,184,0.18);
+    --meter:#efe5cc;
+    --meter-ink:#4a3f2c;
+    --ok:#8fb47a;
+    --line:rgba(211,206,194,0.16);
+    --line-strong:rgba(211,206,194,0.3);
+
+    --f-display:'Oswald', 'Arial Narrow', sans-serif;
+    --f-body:'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --f-mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+    --gutter:clamp(1rem, 4vw, 1.5rem);
+    --wrap:1120px;
+    color-scheme:dark;
   }
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-
-  html{scroll-behavior:smooth;}
-
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:4.5rem;}
   body{
+    margin:0;
     background:var(--walnut);
     color:var(--aluminum);
-    font-family:'Space Grotesk', system-ui, sans-serif;
-    line-height:1.5;
+    font-family:var(--f-body);
+    font-size:1.0625rem;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
   }
+  h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0;}
+  h1,h2,h3{color:var(--paper); text-wrap:balance; line-height:1.12;}
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  [hidden]{display:none !important;}
+  :focus-visible{outline:2px solid var(--glow); outline-offset:3px; border-radius:2px;}
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+    *,*::before,*::after{animation:none !important; transition:none !important;}
   }
 
-  a{color:inherit;}
+  .wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter);}
 
   .label{
-    font-family:'Oswald', sans-serif;
+    font-family:var(--f-display);
     text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.72rem;
+    letter-spacing:0.16em;
+    font-size:0.75rem;
+    font-weight:500;
     color:var(--glow);
   }
 
-  :focus-visible{
-    outline:2px solid var(--glow);
-    outline-offset:3px;
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    font-family:var(--f-display);
+    text-transform:uppercase;
+    letter-spacing:0.09em;
+    font-size:0.85rem;
+    font-weight:500;
+    line-height:1;
+    padding:0.95rem 1.35rem;
+    border-radius:3px;
+    border:1px solid transparent;
+    text-decoration:none;
+    display:inline-flex; align-items:center; justify-content:center; gap:0.5rem;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, color .15s ease, background .15s ease;
   }
+  .btn-primary{background:var(--glow); color:var(--walnut-deep);}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 22px -10px rgba(232,163,61,.7);}
+  .btn-ghost{border-color:var(--line-strong); color:var(--paper); background:transparent;}
+  .btn-ghost:hover{border-color:var(--glow); color:var(--glow);}
+  .btn-sm{padding:0.7rem 1rem; font-size:0.78rem;}
 
-  /* ---------- NAV ---------- */
-  header{
-    position:sticky; top:0; z-index:20;
-    background:var(--walnut-deep);
+  /* ---------- HEADER ---------- */
+  .site-header{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:30;
+    background:rgba(28,17,11,.94);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .nav-wrap{
-    max-width:1100px; margin:0 auto;
-    padding:1rem 1.5rem;
-    display:flex; justify-content:space-between; align-items:center;
-  }
+  .nav-wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:0.85rem;}
   .wordmark{
-    font-family:'Oswald', sans-serif;
-    font-weight:600;
-    letter-spacing:0.08em;
-    font-size:1.05rem;
-    color:var(--paper);
-    text-decoration:none;
+    font-family:var(--f-display);
+    font-weight:600; letter-spacing:0.1em; font-size:1.15rem;
+    color:var(--paper); text-decoration:none; white-space:nowrap;
   }
   .wordmark span{color:var(--glow);}
-  nav ul{
-    list-style:none; display:flex; gap:1.75rem;
+  .nav-links{list-style:none; display:flex; gap:1.6rem; padding:0;}
+  .nav-links a{
+    font-family:var(--f-display); font-size:0.8rem; letter-spacing:0.12em;
+    text-transform:uppercase; text-decoration:none; color:var(--aluminum-dim);
+    transition:color .2s ease;
   }
-  nav a{
-    font-family:'Oswald', sans-serif;
-    font-size:0.75rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:var(--aluminum-dim);
-    transition:color 0.2s ease;
+  .nav-links a:hover{color:var(--glow);}
+  .nav-toggle{
+    display:none;
+    background:none; border:1px solid var(--line-strong); border-radius:3px;
+    color:var(--paper); font-family:var(--f-display); font-size:0.78rem;
+    letter-spacing:0.12em; text-transform:uppercase; padding:0.55rem 0.8rem; cursor:pointer;
   }
-  nav a:hover{color:var(--glow);}
+  @media (max-width:760px){
+    .nav-toggle{display:inline-flex;}
+    .site-nav{
+      position:absolute; left:0; right:0; top:100%;
+      background:var(--walnut-deep); border-bottom:1px solid var(--line);
+      display:none;
+    }
+    .site-nav.open{display:block;}
+    .nav-links{flex-direction:column; gap:0; padding:0.25rem var(--gutter) 0.75rem;}
+    .nav-links a{display:block; padding:0.85rem 0; font-size:0.95rem; border-bottom:1px solid var(--line);}
+    .nav-links li:last-child a{border-bottom:none;}
+  }
 
-  /* ---------- HERO / FACEPLATE ---------- */
+  /* ---------- HERO ---------- */
+  .hero{padding-block:2.25rem 0;}
   .faceplate{
-    max-width:1100px; margin:2.5rem auto 0;
-    padding:0 1.5rem;
-  }
-  .panel{
-    background:linear-gradient(180deg, #2a2725, #1e1c1b);
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, #2e2b28, #1f1d1b);
     border:1px solid var(--line);
     border-radius:6px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 40px -20px rgba(0,0,0,0.6);
-    padding:3rem 2rem;
-    position:relative;
-    overflow:hidden;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 24px 48px -24px rgba(0,0,0,.7);
+    padding:clamp(1.5rem, 5vw, 3rem);
+    display:grid; grid-template-columns:1.2fr 1fr; gap:clamp(1.75rem, 4vw, 3rem); align-items:center;
   }
-  .panel::before{
-    content:"";
-    position:absolute; inset:0;
-    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 44px);
-    pointer-events:none;
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap:2.5rem;
-    align-items:center;
-    position:relative;
-  }
-  @media (max-width:800px){
-    .hero-grid{grid-template-columns:1fr;}
-  }
-  .hero h1{
-    font-size:clamp(2.1rem, 4.5vw, 3.1rem);
-    font-weight:700;
-    color:var(--paper);
-    line-height:1.08;
-    margin:0.6rem 0 1rem;
-  }
-  .hero p{
-    color:var(--aluminum-dim);
-    font-size:1.02rem;
-    max-width:42ch;
-  }
-  .hero .cta-row{
-    margin-top:1.75rem;
-    display:flex; gap:1rem; flex-wrap:wrap;
-  }
-  .btn{
-    font-family:'Oswald', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    font-size:0.78rem;
-    padding:0.85rem 1.5rem;
-    border-radius:3px;
-    text-decoration:none;
-    display:inline-block;
-    transition:transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .btn-primary{
-    background:var(--glow);
-    color:var(--walnut-deep);
-  }
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 20px -8px rgba(232,163,61,0.6);}
-  .btn-ghost{
-    border:1px solid var(--line);
-    color:var(--aluminum);
-  }
-  .btn-ghost:hover{border-color:var(--glow); color:var(--glow);}
+  @media (max-width:860px){.faceplate{grid-template-columns:1fr;}}
+  .hero-copy{min-width:0;}
+  .hero h1{font-size:clamp(2.1rem, 5.2vw, 3.4rem); font-weight:700; margin:0.7rem 0 1rem; letter-spacing:-0.01em;}
+  .hero-copy > p{color:var(--aluminum); max-width:44ch; font-size:1.08rem;}
+  .cta-row{margin-top:1.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;}
 
-  /* VU meter signature element */
+  /* VU meter */
   .vu{
-    background:radial-gradient(120% 140% at 50% 120%, #0e0d0c 0%, #050504 70%);
-    border:1px solid rgba(0,0,0,0.6);
+    background:radial-gradient(120% 140% at 50% 120%, #11100e 0%, #060605 70%);
+    border:1px solid rgba(0,0,0,.6);
     border-radius:8px;
-    padding:1.5rem 1.5rem 1rem;
-    box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
+    padding:1rem 1rem 0.85rem;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.65);
+    max-width:460px; width:100%; justify-self:center;
   }
   .vu-face{
-    position:relative;
-    aspect-ratio: 16/10;
-    background: radial-gradient(120% 100% at 50% 0%, #f4ecd8 0%, #e3d6b3 60%, #d8c89e 100%);
-    border-radius:4px;
-    overflow:hidden;
+    background:radial-gradient(120% 100% at 50% 0%, #fbf3dc 0%, var(--meter) 55%, #dccb9f 100%);
+    border-radius:4px; overflow:hidden; position:relative;
+    box-shadow:inset 0 0 18px rgba(232,163,61,.35);
   }
-  .vu-arc{
-    position:absolute; inset:0;
-  }
+  .vu svg{display:block; width:100%; height:auto;}
+  .vu-line{fill:none; stroke:var(--meter-ink); stroke-width:1.6;}
+  .vu-red{fill:none; stroke:var(--signal); stroke-width:1.6;}
+  .vu-red-band{fill:none; stroke:var(--signal); stroke-width:5; opacity:.85;}
+  .vu-tick{stroke:var(--meter-ink); stroke-width:1.4;}
+  .vu-tick-red{stroke:var(--signal); stroke-width:1.4;}
+  .vu-tick-minor{stroke:var(--meter-ink); stroke-width:1;}
+  .vu-num,.vu-num-red{font-family:var(--f-display); font-size:11px; fill:var(--meter-ink);}
+  .vu-num-red{fill:var(--signal);}
+  .vu-mark{font-family:var(--f-display); font-size:22px; letter-spacing:2px; fill:var(--meter-ink);}
+  .vu-brand{font-family:var(--f-display); font-size:8px; letter-spacing:3px; fill:var(--meter-ink); opacity:.7;}
   .vu-needle{
-    position:absolute;
-    bottom:2px; left:50%;
-    width:2px; height:74%;
-    background:var(--signal);
-    transform-origin:bottom center;
-    transform:translateX(-50%) rotate(-32deg);
-    animation: sweep 3.2s ease-in-out infinite;
-    box-shadow:0 0 6px rgba(196,67,43,0.5);
+    stroke:#1b1714; stroke-width:1.6; stroke-linecap:round;
+    transform-box:view-box; transform-origin:160px 206px;
+    transform:rotate(-43deg);
+    animation:program 6s ease-in-out infinite;
   }
-  @keyframes sweep{
-    0%,100%{transform:translateX(-50%) rotate(-32deg);}
-    50%{transform:translateX(-50%) rotate(18deg);}
+  @keyframes program{
+    0%  {transform:rotate(-43deg);}
+    8%  {transform:rotate(-6deg);}
+    14% {transform:rotate(-14deg);}
+    22% {transform:rotate(4deg);}
+    30% {transform:rotate(-9deg);}
+    38% {transform:rotate(12deg);}
+    44% {transform:rotate(-2deg);}
+    52% {transform:rotate(-12deg);}
+    60% {transform:rotate(7deg);}
+    68% {transform:rotate(-5deg);}
+    76% {transform:rotate(16deg);}
+    84% {transform:rotate(-8deg);}
+    92% {transform:rotate(1deg);}
+    100%{transform:rotate(-43deg);}
   }
-  .vu-pivot{
-    position:absolute; bottom:0; left:50%; width:10px; height:10px;
-    background:#2a2620; border-radius:50%; transform:translate(-50%,50%);
-  }
-  .vu-scale{
-    position:absolute; top:14%; left:8%; right:8%;
-    display:flex; justify-content:space-between;
-    font-family:'Oswald', sans-serif;
-    font-size:0.6rem; color:#5b4f38; letter-spacing:0.02em;
-  }
+  @media (prefers-reduced-motion: reduce){ .vu-needle{transform:rotate(-3deg);} }
   .vu-caption{
-    font-family:'Oswald', sans-serif;
-    font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase;
-    color:var(--aluminum-dim);
-    text-align:center; margin-top:0.85rem;
+    font-family:var(--f-display); font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--aluminum-dim); text-align:center; margin-top:0.7rem;
+  }
+
+  /* Promise strip */
+  .promises{
+    list-style:none; padding:0; margin-top:1rem;
+    display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+    border:1px solid var(--line); border-radius:4px; background:var(--walnut-deep);
+  }
+  .promises li{
+    padding:0.9rem 1rem; border-left:1px solid var(--line);
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:0.1em; font-size:0.74rem;
+    color:var(--aluminum); display:flex; align-items:center; gap:0.6rem; min-width:0;
+  }
+  .promises li:first-child{border-left:none;}
+  .promises .dot{width:7px; height:7px; border-radius:50%; background:var(--glow); box-shadow:0 0 8px var(--glow); flex:none;}
+  @media (max-width:860px){
+    .promises{grid-template-columns:repeat(2, minmax(0,1fr));}
+    .promises li:nth-child(3){border-left:none;}
+    .promises li:nth-child(n+3){border-top:1px solid var(--line);}
   }
 
   /* ---------- SECTIONS ---------- */
-  section{
-    max-width:1100px; margin:0 auto;
-    padding:5rem 1.5rem;
-  }
+  .section{padding-block:clamp(3.5rem, 8vw, 5.5rem) 0;}
+  .section:last-of-type{padding-bottom:clamp(3.5rem, 8vw, 5.5rem);}
   .section-head{
-    display:flex; align-items:baseline; gap:1rem;
-    margin-bottom:2.5rem;
-    border-bottom:1px solid var(--line);
-    padding-bottom:1rem;
+    display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid var(--line);
   }
-  .section-head h2{
-    font-size:1.6rem;
-    color:var(--paper);
-    font-weight:600;
+  .section-head h2{font-size:clamp(1.6rem, 3.6vw, 2.1rem); font-weight:600; margin-top:0.35rem;}
+  .section-head p{color:var(--aluminum-dim); max-width:46ch; font-size:0.98rem;}
+  .subhead{
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:0.14em; font-size:0.85rem;
+    color:var(--paper); margin:2.75rem 0 1.25rem; display:flex; align-items:center; gap:0.75rem;
   }
+  .subhead::after{content:""; flex:1; height:1px; background:var(--line);}
 
-  /* Restoration cards, labeled by model like a catalog */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-    gap:1.5rem;
-  }
+  /* ---------- UNIT CARDS ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap:1.25rem;}
+  .grid-tight{grid-template-columns:repeat(auto-fill, minmax(min(100%, 240px), 1fr));}
   .card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:5px;
-    overflow:hidden;
-    transition:transform 0.2s ease, border-color 0.2s ease;
+    background:var(--panel); border:1px solid var(--line); border-radius:5px; overflow:hidden;
+    display:flex; flex-direction:column; min-width:0;
   }
-  .card:hover{transform:translateY(-4px); border-color:var(--glow-dim);}
-  .card-plate{
-    aspect-ratio:4/3;
+  .card-photo{aspect-ratio:4/3; max-width:100%; background:#1a1816; border-bottom:1px solid var(--line); position:relative;}
+  .card-photo img{width:100%; height:100%; object-fit:cover;}
+  .nameplate{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.35rem;
     background:
-      linear-gradient(135deg, rgba(232,163,61,0.07), transparent 60%),
-      repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 10px),
-      linear-gradient(180deg,#3a352f,#221f1c);
-    display:flex; align-items:center; justify-content:center;
-    border-bottom:1px solid var(--line);
+      repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 2px),
+      linear-gradient(180deg, #4a4640 0%, #2e2b27 55%, #24211e 100%);
+    text-align:center; padding:1rem;
   }
-  .card-plate span{
-    font-family:'Oswald', sans-serif;
-    color:var(--aluminum-dim);
-    letter-spacing:0.1em;
-    font-size:0.72rem;
+  .nameplate .np-brand{font-family:var(--f-display); font-size:0.78rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--aluminum-dim);}
+  .nameplate .np-model{font-family:var(--f-display); font-size:clamp(1.6rem, 6vw, 2.1rem); letter-spacing:0.06em; color:var(--aluminum); text-shadow:0 1px 0 rgba(0,0,0,.6);}
+  .nameplate .np-lamp{width:46%; height:3px; border-radius:2px; background:linear-gradient(90deg, transparent, var(--glow), transparent); opacity:.55; margin-top:0.4rem;}
+  .status{
+    position:absolute; top:0.75rem; left:0.75rem;
+    font-family:var(--f-display); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase;
+    padding:0.3rem 0.55rem; border-radius:2px; background:rgba(15,10,7,.82); color:var(--aluminum);
+    display:inline-flex; align-items:center; gap:0.45rem;
   }
-  .card-body{padding:1.25rem 1.3rem 1.5rem;}
-  .card-model{
-    font-family:'Oswald', sans-serif;
-    font-size:0.68rem;
-    letter-spacing:0.12em;
-    color:var(--glow);
-    text-transform:uppercase;
-    margin-bottom:0.4rem;
-  }
-  .card-body h3{
-    color:var(--paper);
-    font-size:1.1rem;
-    margin-bottom:0.5rem;
-    font-weight:600;
-  }
-  .card-body p{
-    color:var(--aluminum-dim);
-    font-size:0.92rem;
-  }
-  .card-tags{
-    margin-top:0.9rem;
-    display:flex; gap:0.5rem; flex-wrap:wrap;
-  }
-  .tag{
-    font-family:'Oswald', sans-serif;
-    font-size:0.6rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    border:1px solid var(--line);
-    color:var(--aluminum-dim);
-    padding:0.25rem 0.55rem;
-    border-radius:2px;
-  }
+  .status::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .status.is-sale{color:var(--ok);}
+  .status.is-bench{color:var(--glow);}
+  .status.is-sold{color:var(--aluminum-dim);}
 
-  /* About */
-  .about-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:3rem;
-  }
-  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid p{color:var(--aluminum-dim); margin-bottom:1rem;}
-  .about-grid p:last-child{margin-bottom:0;}
-  .about-photo{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:5px;
-    aspect-ratio:4/3;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .about-photo span{
-    font-family:'Oswald', sans-serif;
-    color:var(--aluminum-dim);
-    font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;
-  }
+  .card-body{padding:1.2rem 1.25rem 1.35rem; display:flex; flex-direction:column; gap:0.6rem; flex:1;}
+  .card-model{font-family:var(--f-display); font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--glow);}
+  .card-body h3{font-size:1.18rem; font-weight:600;}
+  .card-body > p{color:var(--aluminum-dim); font-size:0.97rem;}
+  .price{font-family:var(--f-display); font-size:1.65rem; color:var(--paper); font-variant-numeric:tabular-nums; letter-spacing:0.02em;}
+  .price small{font-size:0.8rem; color:var(--aluminum-dim); letter-spacing:0.08em; text-transform:uppercase; margin-left:0.4rem;}
 
-  /* Contact styled as a spec sheet */
-  .spec-sheet{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:6px;
-    padding:2rem;
+  .sheet{border:1px solid var(--line); border-radius:3px; background:var(--walnut-deep);}
+  .sheet summary{
+    cursor:pointer; list-style:none; padding:0.65rem 0.85rem;
+    font-family:var(--f-display); text-transform:uppercase; letter-spacing:0.12em; font-size:0.74rem; color:var(--paper);
+    display:flex; justify-content:space-between; align-items:center;
   }
-  .spec-row{
-    display:flex; justify-content:space-between; gap:1rem;
-    padding:0.9rem 0;
-    border-bottom:1px solid var(--line);
-    flex-wrap:wrap;
+  .sheet summary::-webkit-details-marker{display:none;}
+  .sheet summary::after{content:"+"; color:var(--glow); font-size:1rem;}
+  .sheet[open] summary::after{content:"–";}
+  .sheet ul{list-style:none; padding:0 0.85rem 0.75rem;}
+  .sheet li{
+    font-family:var(--f-mono); font-size:0.8rem; color:var(--aluminum);
+    padding:0.45rem 0; border-top:1px dashed var(--line);
   }
+  .card-actions{display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:auto; padding-top:0.5rem;}
+  .card-note{font-size:0.82rem; color:var(--aluminum-dim);}
+
+  .empty{
+    border:1px dashed var(--line-strong); border-radius:5px; padding:1.5rem 1.35rem;
+    background:rgba(28,17,11,.5);
+    display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap; justify-content:space-between;
+  }
+  .empty p{max-width:56ch; color:var(--aluminum); min-width:0;}
+  .empty strong{color:var(--paper); font-weight:600;}
+
+  /* Past work: compact rows */
+  .past{list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap:0.75rem;}
+  .past li{
+    display:grid; grid-template-columns:auto 1fr; gap:0.25rem 1rem; align-items:baseline;
+    padding:1rem 1.1rem; border:1px solid var(--line); border-radius:4px; background:var(--panel);
+  }
+  .past .pm{font-family:var(--f-display); letter-spacing:0.08em; color:var(--paper); font-size:1.05rem; white-space:nowrap;}
+  .past .ps{font-family:var(--f-display); font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--aluminum-dim); justify-self:end;}
+  .past p{grid-column:1 / -1; color:var(--aluminum-dim); font-size:0.94rem;}
+
+  /* ---------- REPAIRS ---------- */
+  .repair-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(1.75rem, 4vw, 3rem); align-items:start;}
+  @media (max-width:900px){.repair-grid{grid-template-columns:1fr;}}
+  .repair-grid > *{min-width:0;}
+  .fixes{list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 1.25rem; margin-top:1rem;}
+  @media (max-width:520px){.fixes{grid-template-columns:1fr;}}
+  .fixes li{padding-left:1.1rem; position:relative; color:var(--aluminum); font-size:0.98rem;}
+  .fixes li::before{content:""; position:absolute; left:0; top:0.62em; width:6px; height:6px; border-radius:50%; background:var(--glow-dim);}
+  .brands{margin-top:1.25rem; color:var(--aluminum-dim); font-size:0.95rem;}
+  .brands strong{color:var(--paper); font-weight:500;}
+  .steps{list-style:none; padding:0; margin-top:2rem; counter-reset:step; display:grid; gap:0;}
+  .steps li{counter-increment:step; display:grid; grid-template-columns:2.6rem 1fr; gap:0.9rem; padding:0.95rem 0; border-top:1px solid var(--line);}
+  .steps li::before{
+    content:counter(step); font-family:var(--f-display); font-size:1.05rem; color:var(--walnut-deep);
+    background:var(--glow); width:2.1rem; height:2.1rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-variant-numeric:tabular-nums;
+  }
+  .steps strong{display:block; color:var(--paper); font-weight:600;}
+  .steps span{color:var(--aluminum-dim); font-size:0.95rem;}
+
+  .form{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:clamp(1.25rem, 4vw, 1.75rem); display:grid; gap:1rem;
+  }
+  .form h3{font-size:1.25rem;}
+  .form .hint{color:var(--aluminum-dim); font-size:0.92rem; margin-top:-0.5rem;}
+  .field{display:grid; gap:0.35rem; min-width:0;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:1rem;}
+  @media (max-width:560px){.field-row{grid-template-columns:1fr;}}
+  .field label{font-family:var(--f-display); font-size:0.74rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--aluminum);}
+  .field input,.field select,.field textarea{
+    width:100%; font:inherit; font-size:1rem; color:var(--paper);
+    background:var(--walnut-deep); border:1px solid var(--line-strong); border-radius:3px;
+    padding:0.75rem 0.8rem;
+  }
+  .field textarea{min-height:7rem; resize:vertical;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none; border-color:var(--glow); box-shadow:0 0 0 3px rgba(232,163,61,.18);}
+  .form-status{font-size:0.95rem; color:var(--paper); background:var(--walnut-deep); border:1px solid var(--line); border-left:3px solid var(--ok); border-radius:3px; padding:0.85rem 1rem; display:grid; gap:0.6rem;}
+  .form-status.is-error{border-left-color:var(--signal);}
+  .form-status textarea{width:100%; min-height:8rem; font-family:var(--f-mono); font-size:0.8rem; background:#120b07; color:var(--aluminum); border:1px solid var(--line); border-radius:3px; padding:0.6rem;}
+
+  /* ---------- PARTS ---------- */
+  .parts{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap:1rem;}
+  .part{background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:1.25rem; display:flex; flex-direction:column; gap:0.6rem; min-width:0;}
+  .part h3{font-size:1.08rem; font-weight:600;}
+  .part p{color:var(--aluminum-dim); font-size:0.95rem;}
+  .part .opts{font-family:var(--f-mono); font-size:0.8rem; color:var(--glow); letter-spacing:0.02em;}
+  .part .part-foot{display:flex; align-items:center; justify-content:space-between; gap:0.75rem; flex-wrap:wrap; margin-top:auto; padding-top:0.5rem;}
+  .part .price{font-size:1.3rem;}
+  .part .price.ask{font-size:0.85rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--aluminum-dim);}
+
+  /* ---------- ABOUT ---------- */
+  .about{display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(1.75rem, 4vw, 3rem); align-items:start;}
+  .about.no-photo{grid-template-columns:minmax(0, 68ch);}
+  @media (max-width:860px){.about{grid-template-columns:1fr;}}
+  .about-copy{display:grid; gap:1rem; min-width:0;}
+  .about-copy p{color:var(--aluminum);}
+  .about-photo{border-radius:5px; overflow:hidden; border:1px solid var(--line); aspect-ratio:4/3; max-width:100%;}
+  .about-photo img{width:100%; height:100%; object-fit:cover;}
+
+  /* ---------- CONTACT (spec sheet) ---------- */
+  .spec{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:0.5rem clamp(1.1rem, 4vw, 2rem);}
+  .spec-row{display:grid; grid-template-columns:minmax(7rem, 11rem) 1fr; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--line); align-items:baseline;}
   .spec-row:last-child{border-bottom:none;}
-  .spec-key{
-    font-family:'Oswald', sans-serif;
-    font-size:0.72rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--aluminum-dim);
-  }
-  .spec-val{
-    font-size:0.98rem;
-    color:var(--paper);
-  }
-  .spec-val a{
-    color:var(--glow);
-    text-decoration:none;
-    border-bottom:1px solid var(--glow-dim);
-  }
+  @media (max-width:520px){.spec-row{grid-template-columns:1fr; gap:0.25rem;}}
+  .spec-key{font-family:var(--f-display); font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--aluminum-dim);}
+  .spec-val{color:var(--paper); min-width:0; overflow-wrap:anywhere;}
+  .spec-val a{color:var(--glow); text-decoration:none; border-bottom:1px solid var(--glow-dim);}
   .spec-val a:hover{border-color:var(--glow);}
+  .spec-val .sep{color:var(--aluminum-dim); margin-inline:0.35rem;}
 
-  footer{
-    text-align:center;
-    padding:2.5rem 1.5rem 3rem;
-    color:var(--aluminum-dim);
-    font-size:0.8rem;
-  }
+  /* ---------- POLICIES ---------- */
+  .policies{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap:0;}
+  .policy{padding:1.1rem 0; border-top:1px solid var(--line); padding-right:1.5rem;}
+  .policy h3{font-family:var(--f-display); font-weight:500; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--paper); margin-bottom:0.4rem;}
+  .policy p{color:var(--aluminum-dim); font-size:0.95rem;}
+
+  footer{border-top:1px solid var(--line); background:var(--walnut-deep);}
+  .foot{padding-block:2rem 2.5rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; color:var(--aluminum-dim); font-size:0.9rem;}
+  .foot a{color:var(--aluminum); text-decoration:none;}
+  .foot a:hover{color:var(--glow);}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-wrap">
+<header class="site-header">
+  <div class="wrap nav-wrap">
     <a href="#top" class="wordmark">HI-FI <span>HOPES</span></a>
-    <nav>
-      <ul>
-        <li><a href="#work">Restorations</a></li>
-        <li><a href="#about">About</a></li>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#shop">For Sale</a></li>
+        <li><a href="#repairs">Repairs</a></li>
+        <li><a href="#parts" id="nav-parts">Parts</a></li>
+        <li><a href="#past">Past Work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -361,165 +448,479 @@
 
 <main id="top">
 
-  <div class="faceplate">
-    <div class="panel">
-      <div class="hero-grid">
-        <div class="hero">
-          <p class="label">Silverface Restoration &amp; Resale</p>
-          <h1>Vintage receivers, brought back to spec.</h1>
-          <p>Hi-Fi Hopes restores 1970s-era Marantz, Sansui, Kenwood, and Pioneer receivers &mdash; bias and offset adjustment, LED replacement, recapping, and full fault diagnosis &mdash; then finds them a good next home.</p>
-          <div class="cta-row">
-            <a href="#work" class="btn btn-primary">See the work</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
-          </div>
-        </div>
-        <div class="vu" aria-hidden="true">
-          <div class="vu-face">
-            <div class="vu-scale">
-              <span>-20</span><span>-10</span><span>-3</span><span>0</span><span>+3</span>
-            </div>
-            <div class="vu-needle"></div>
-            <div class="vu-pivot"></div>
-          </div>
-          <p class="vu-caption">Signal restored</p>
+  <!-- HERO -->
+  <div class="wrap hero">
+    <div class="faceplate">
+      <div class="hero-copy">
+        <p class="label">Repair &amp; Restoration · Sales</p>
+        <h1>Vintage receivers, brought back to spec.</h1>
+        <p>Marantz, Sansui, Pioneer, Kenwood and Yamaha receivers from the 1970s, serviced and measured on the bench in Paulding, Ohio. Buy one restored, or bring yours in for repair.</p>
+        <div class="cta-row">
+          <a href="#shop" class="btn btn-primary">Shop restored units</a>
+          <a href="#repairs" class="btn btn-ghost">Book a repair</a>
         </div>
       </div>
+
+      <div class="vu" aria-hidden="true">
+        <div class="vu-face">
+          <svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg">
+            <path class="vu-line" d="M45.6 83.0 A168 168 0 0 1 219.6 48.9"/>
+            <path class="vu-red" d="M219.6 48.9 A168 168 0 0 1 288.7 98.0"/>
+            <path class="vu-red-band" d="M217.5 54.6 A162 162 0 0 1 284.1 101.9"/>
+            <line class="vu-tick" x1="45.6" y1="83.0" x2="38.8" y2="75.7"/>
+            <text class="vu-num" x="30.6" y="66.9" text-anchor="middle">-20</text>
+            <line class="vu-tick" x1="82.1" y1="57.1" x2="77.5" y2="48.3"/>
+            <text class="vu-num" x="71.9" y="37.6" text-anchor="middle">-10</text>
+            <line class="vu-tick" x1="107.0" y1="46.6" x2="103.9" y2="37.1"/>
+            <text class="vu-num" x="100.1" y="25.7" text-anchor="middle">-7</text>
+            <line class="vu-tick" x1="130.3" y1="40.6" x2="128.5" y2="30.8"/>
+            <text class="vu-num" x="126.4" y="19.0" text-anchor="middle">-5</text>
+            <line class="vu-tick" x1="160.3" y1="38.0" x2="160.4" y2="28.0"/>
+            <text class="vu-num" x="160.4" y="16.0" text-anchor="middle">-3</text>
+            <line class="vu-tick" x1="178.2" y1="39.0" x2="179.3" y2="29.1"/>
+            <text class="vu-num" x="180.6" y="17.1" text-anchor="middle">-2</text>
+            <line class="vu-tick" x1="198.1" y1="42.4" x2="200.3" y2="32.6"/>
+            <text class="vu-num" x="203.0" y="20.9" text-anchor="middle">-1</text>
+            <line class="vu-tick" x1="219.6" y1="48.9" x2="223.2" y2="39.6"/>
+            <text class="vu-num" x="227.5" y="28.4" text-anchor="middle">0</text>
+            <line class="vu-tick-red" x1="242.6" y1="59.7" x2="247.5" y2="51.0"/>
+            <text class="vu-num-red" x="253.4" y="40.5" text-anchor="middle">+1</text>
+            <line class="vu-tick-red" x1="266.0" y1="75.7" x2="272.3" y2="67.9"/>
+            <text class="vu-num-red" x="279.9" y="58.6" text-anchor="middle">+2</text>
+            <line class="vu-tick-red" x1="288.7" y1="98.0" x2="296.4" y2="91.6"/>
+            <text class="vu-num-red" x="305.5" y="83.9" text-anchor="middle">+3</text>
+            <line class="vu-tick-minor" x1="57.9" y1="72.6" x2="54.9" y2="68.6"/>
+            <line class="vu-tick-minor" x1="97.6" y1="50.0" x2="95.7" y2="45.4"/>
+            <line class="vu-tick-minor" x1="117.9" y1="43.4" x2="116.6" y2="38.5"/>
+            <line class="vu-tick-minor" x1="144.4" y1="38.7" x2="143.9" y2="33.7"/>
+            <line class="vu-tick-minor" x1="169.1" y1="38.2" x2="169.3" y2="33.3"/>
+            <line class="vu-tick-minor" x1="187.9" y1="40.3" x2="188.8" y2="35.4"/>
+            <line class="vu-tick-minor" x1="208.7" y1="45.2" x2="210.1" y2="40.4"/>
+            <line class="vu-tick-minor" x1="231.0" y1="53.7" x2="233.1" y2="49.2"/>
+            <line class="vu-tick-minor" x1="254.3" y1="67.0" x2="257.1" y2="62.8"/>
+            <line class="vu-tick-minor" x1="277.6" y1="86.0" x2="281.1" y2="82.4"/>
+            <text class="vu-mark" x="160" y="132" text-anchor="middle">VU</text>
+            <text class="vu-brand" x="160" y="150" text-anchor="middle">HI-FI HOPES</text>
+            <line class="vu-needle" x1="160" y1="206" x2="160" y2="44"/>
+          </svg>
+        </div>
+        <p class="vu-caption">Signal restored</p>
+      </div>
     </div>
+
+    <ul class="promises" aria-label="What you get">
+      <li><span class="dot"></span>Service sheet with every unit</li>
+      <li><span class="dot"></span>Bias &amp; offset set to spec</li>
+      <li><span class="dot"></span>Pickup in Paulding, OH</li>
+      <li><span class="dot"></span>Se habla español</li>
+    </ul>
   </div>
 
-  <section id="work">
+  <!-- FOR SALE + ON THE BENCH -->
+  <section class="section wrap" id="shop">
     <div class="section-head">
-      <h2>Recent Restorations</h2>
+      <div>
+        <p class="label">Restored units</p>
+        <h2>For Sale</h2>
+      </div>
+      <p>Each unit is serviced, measured and played before it's listed. The service sheet shows exactly what was done.</p>
     </div>
-    <div class="grid">
+    <div id="for-sale"></div>
 
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Marantz 2238B</p>
-          <h3>Full service &amp; resale</h3>
-          <p>Bias and offset dialed in, warm-white LED dial replacement, full recap, contacts cleaned. Sold within original spec after market research.</p>
-          <div class="card-tags">
-            <span class="tag">Recap</span>
-            <span class="tag">LED swap</span>
-            <span class="tag">Sold</span>
-          </div>
-        </div>
+    <h3 class="subhead" id="bench-head">On the bench</h3>
+    <div class="grid grid-tight" id="bench"></div>
+  </section>
+
+  <!-- REPAIRS -->
+  <section class="section wrap" id="repairs">
+    <div class="section-head">
+      <div>
+        <p class="label">Bring yours in</p>
+        <h2>Repair Services</h2>
+      </div>
+      <p>Your receiver gets the same bench process as the units I sell.</p>
+    </div>
+
+    <div class="repair-grid">
+      <div>
+        <p>Common jobs:</p>
+        <ul class="fixes">
+          <li>Protection circuit won't release</li>
+          <li>Dead or weak channel</li>
+          <li>Dark dial and meter lamps (LED conversion)</li>
+          <li>Scratchy volume, switches and pots</li>
+          <li>Failing capacitors</li>
+          <li>Bias and DC offset alignment</li>
+        </ul>
+        <p class="brands"><strong>Brands:</strong> Marantz, Sansui, Pioneer, Kenwood, Yamaha, Technics, Fisher and other 1970s receivers and integrated amps.</p>
+
+        <ol class="steps" aria-label="How a repair works">
+          <li><div><strong>Tell me what's wrong</strong><span>Use the form or call. Photos help.</span></div></li>
+          <li><div><strong>Drop it off or ship it</strong><span>Drop off in Paulding by appointment, or ship it in.</span></div></li>
+          <li><div><strong>Diagnosis and a written quote</strong><span>No work starts until you approve the quote.</span></div></li>
+          <li><div><strong>Repair, test, pick up</strong><span>You get a service sheet listing everything that was done.</span></div></li>
+        </ol>
       </div>
 
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Sansui 7070</p>
-          <h3>Power supply &amp; recap</h3>
-          <p>Power supply filter capacitors replaced, navigating Sansui-specific polarity quirks. Full restoration in progress.</p>
-          <div class="card-tags">
-            <span class="tag">Recap</span>
-            <span class="tag">In progress</span>
+      <form class="form" id="repair-form" novalidate>
+        <h3>Request a repair</h3>
+        <p class="hint" id="form-hint">I reply within a day or two.</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="r-name">Your name</label>
+            <input id="r-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="r-contact">Email or phone</label>
+            <input id="r-contact" name="contact" autocomplete="email" required>
           </div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Sansui 2000X</p>
-          <h3>Channel fault diagnosis</h3>
-          <p>Diagnosing a left-channel failure as part of a paired restoration alongside the 7070.</p>
-          <div class="card-tags">
-            <span class="tag">Diagnosis</span>
-            <span class="tag">In progress</span>
+        <div class="field">
+          <label for="r-model">Make and model</label>
+          <input id="r-model" name="model" placeholder="e.g. Pioneer SX-780" required>
+        </div>
+        <div class="field">
+          <label for="r-problem">What's it doing?</label>
+          <textarea id="r-problem" name="problem" placeholder="e.g. Right channel cuts out, protection relay clicks on and off" required></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="r-history">How long since it was used?</label>
+            <select id="r-history" name="history">
+              <option>In regular use</option>
+              <option>Sat for a few years</option>
+              <option>Sat for 10+ years</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-dropoff">Getting it here</label>
+            <select id="r-dropoff" name="dropoff">
+              <option>Drop off in Paulding</option>
+              <option>Ship it in</option>
+              <option>Not sure yet</option>
+            </select>
           </div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Kenwood Eleven III</p>
-          <h3>Flagship curbside find</h3>
-          <p>Sourced alongside a Kenwood KX-1030. A flagship-class unit worth well above initial estimate &mdash; restoration underway.</p>
-          <div class="card-tags">
-            <span class="tag">Flagship</span>
-            <span class="tag">In progress</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Marantz 2285B</p>
-          <h3>Under evaluation</h3>
-          <p>Assessing as the next flip candidate, with pre/main jumper testing to isolate preamp vs. amp section faults.</p>
-          <div class="card-tags">
-            <span class="tag">Evaluation</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-plate"><span>Photo coming soon</span></div>
-        <div class="card-body">
-          <p class="card-model">Sansui 881</p>
-          <h3>Queued for service</h3>
-          <p>Next in the restoration queue, sharing meter light grommets and bulbs with other units in the shop.</p>
-          <div class="card-tags">
-            <span class="tag">Queued</span>
-          </div>
-        </div>
-      </div>
-
+        <button class="btn btn-primary" type="submit" id="r-submit">Send repair request</button>
+        <div class="form-status" id="form-status" role="status" hidden></div>
+      </form>
     </div>
   </section>
 
-  <section id="about">
+  <!-- PARTS -->
+  <section class="section wrap" id="parts">
     <div class="section-head">
-      <h2>About the shop</h2>
-    </div>
-    <div class="about-grid">
       <div>
-        <p>Hi-Fi Hopes is a one-person restoration shop working out of Paulding, Ohio, focused on silverface-era receivers from Marantz, Sansui, Pioneer, Kenwood, and Yamaha.</p>
-        <p>Every unit gets the same treatment: bias and offset verified against spec, failing capacitors replaced, dial lighting restored with warm-white LEDs, and contacts cleaned before anything goes back together. Nothing leaves the bench until it measures right.</p>
+        <p class="label">From the parts drawer</p>
+        <h2>Parts</h2>
+      </div>
+      <p>The same parts I use on the bench, for people doing their own work.</p>
+    </div>
+    <div class="parts" id="parts-list"></div>
+  </section>
+
+  <!-- PAST WORK -->
+  <section class="section wrap" id="past">
+    <div class="section-head">
+      <div>
+        <p class="label">Sold and delivered</p>
+        <h2>Past Work</h2>
+      </div>
+    </div>
+    <ul class="past" id="past-list"></ul>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section wrap" id="about">
+    <div class="section-head">
+      <div>
+        <p class="label">The shop</p>
+        <h2>About Hi-Fi Hopes</h2>
+      </div>
+    </div>
+    <div class="about" id="about-grid">
+      <div class="about-copy">
+        <p>Hi-Fi Hopes is a one-person restoration shop in Paulding, Ohio, focused on silverface-era receivers from Marantz, Sansui, Pioneer, Kenwood and Yamaha.</p>
+        <p>Every unit gets the same treatment: capacitors screened and replaced where they've drifted, bias and offset set against the service manual, dial lighting restored with warm-white LEDs, and contacts cleaned before anything goes back together. Nothing leaves the bench until it measures right.</p>
         <p>Hi-Fi Hopes, LLC is registered in Ohio.</p>
       </div>
-      <div class="about-photo"><span>Workbench photo coming soon</span></div>
+      <figure class="about-photo" id="about-photo" hidden></figure>
     </div>
   </section>
 
-  <section id="contact">
+  <!-- CONTACT -->
+  <section class="section wrap" id="contact">
     <div class="section-head">
-      <h2>Contact</h2>
-    </div>
-    <div class="spec-sheet">
-      <div class="spec-row">
-        <span class="spec-key">Shop</span>
-        <span class="spec-val">Hi-Fi Hopes, LLC</span>
-      </div>
-      <div class="spec-row">
-        <span class="spec-key">Location</span>
-        <span class="spec-val">Paulding, Ohio</span>
-      </div>
-      <div class="spec-row">
-        <span class="spec-key">Email</span>
-        <span class="spec-val"><a href="mailto:hello@hifihopes.com">hello@hifihopes.com</a></span>
-      </div>
-      <div class="spec-row">
-        <span class="spec-key">Marketplaces</span>
-        <span class="spec-val">eBay &middot; Facebook Marketplace &middot; US Audio Mart</span>
+      <div>
+        <p class="label">Get in touch</p>
+        <h2>Contact</h2>
       </div>
     </div>
+    <div class="spec" id="contact-sheet"></div>
+  </section>
+
+  <!-- POLICIES -->
+  <section class="section wrap" id="policies">
+    <div class="section-head">
+      <div>
+        <p class="label">The fine print</p>
+        <h2>Buying from Hi-Fi Hopes</h2>
+      </div>
+    </div>
+    <div class="policies" id="policy-list"></div>
   </section>
 
 </main>
 
 <footer>
-  &copy; <span id="year"></span> Hi-Fi Hopes, LLC &mdash; Paulding, Ohio
+  <div class="wrap foot">
+    <span>&copy; <span id="year">2026</span> Hi-Fi Hopes, LLC · Paulding, Ohio</span>
+    <span><a href="#policies">Shipping &amp; policies</a> · <a href="#contact">Contact</a></span>
+  </div>
 </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<noscript>
+  <p style="text-align:center;padding:1rem;color:#d3cec2;background:#1c110b;margin:0">Listings need JavaScript to load. Email <a href="mailto:dan@hifihopes.com">dan@hifihopes.com</a> for what's available.</p>
+</noscript>
 
+<script src="site-data.js"></script>
+<script>
+(function(){
+  var data = window.HFH || {config:{}, units:[], parts:[]};
+  var cfg = data.config || {};
+  var email = cfg.email || "dan@hifihopes.com";
+
+  /* ---------- helpers ---------- */
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function money(n){
+    return "$" + Number(n).toLocaleString("en-US", {minimumFractionDigits:0, maximumFractionDigits:2});
+  }
+  function mailto(subject, body){
+    return "mailto:" + email + "?subject=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
+  }
+  function telHref(p){ return "tel:" + String(p).replace(/[^\d+]/g, ""); }
+  function unitName(u){ return u.brand + " " + u.model; }
+
+  function photoBlock(u, statusClass, statusText){
+    var inner = u.photo
+      ? '<img src="' + esc(u.photo) + '" alt="' + esc(unitName(u)) + '" loading="lazy">'
+      : '<div class="nameplate" aria-hidden="true"><span class="np-brand">' + esc(u.brand) + '</span><span class="np-model">' + esc(u.model) + '</span><span class="np-lamp"></span></div>';
+    return '<div class="card-photo">' + inner + '<span class="status ' + statusClass + '">' + statusText + '</span></div>';
+  }
+
+  function serviceSheet(u){
+    if (!u.service || !u.service.length) return "";
+    return '<details class="sheet"><summary>Service sheet</summary><ul>' +
+      u.service.map(function(s){ return "<li>" + esc(s) + "</li>"; }).join("") +
+      "</ul></details>";
+  }
+
+  /* ---------- for sale ---------- */
+  var units = data.units || [];
+  var forSale = units.filter(function(u){ return u.status === "for-sale"; });
+  var bench   = units.filter(function(u){ return u.status === "bench"; });
+  var sold    = units.filter(function(u){ return u.status === "sold"; });
+
+  var saleEl = document.getElementById("for-sale");
+  if (forSale.length){
+    saleEl.className = "grid";
+    saleEl.innerHTML = forSale.map(function(u){
+      var actions = [];
+      if (u.buyLink) actions.push('<a class="btn btn-primary btn-sm" href="' + esc(u.buyLink) + '" rel="noopener">Buy now</a>');
+      if (u.depositLink) actions.push('<a class="btn ' + (u.buyLink ? "btn-ghost" : "btn-primary") + ' btn-sm" href="' + esc(u.depositLink) + '" rel="noopener">Reserve' + (u.deposit ? " · " + money(u.deposit) + " deposit" : "") + '</a>');
+      actions.push('<a class="btn btn-ghost btn-sm" href="' + esc(mailto("Question about the " + unitName(u))) + '">Ask a question</a>');
+      return '<article class="card">' +
+        photoBlock(u, "is-sale", "For sale") +
+        '<div class="card-body">' +
+          '<p class="card-model">' + esc(unitName(u)) + '</p>' +
+          '<h3>' + esc(u.headline) + '</h3>' +
+          (u.price != null ? '<p class="price">' + money(u.price) + '</p>' : "") +
+          '<p>' + esc(u.summary) + '</p>' +
+          serviceSheet(u) +
+          '<div class="card-actions">' + actions.join("") + '</div>' +
+          '<p class="card-note">Pickup in Paulding, or insured freight quoted to your ZIP.</p>' +
+        '</div></article>';
+    }).join("");
+  } else {
+    saleEl.className = "empty";
+    saleEl.innerHTML =
+      '<p><strong>Nothing ready to ship right now.</strong> The receivers below are on the bench. Ask for first call on one and you’ll hear about it before it’s listed anywhere else.</p>' +
+      '<a class="btn btn-ghost btn-sm" href="' + esc(mailto("Put me on the first-call list", "Hi Dan,\n\nI'm interested in: \n\nBest way to reach me: ")) + '">Get on the list</a>';
+  }
+
+  /* ---------- on the bench ---------- */
+  var benchEl = document.getElementById("bench");
+  if (bench.length){
+    benchEl.innerHTML = bench.map(function(u){
+      return '<article class="card">' +
+        photoBlock(u, "is-bench", "On the bench") +
+        '<div class="card-body">' +
+          '<p class="card-model">' + esc(unitName(u)) + '</p>' +
+          '<h3>' + esc(u.headline) + '</h3>' +
+          '<p>' + esc(u.summary) + '</p>' +
+          serviceSheet(u) +
+          '<div class="card-actions"><a class="btn btn-ghost btn-sm" href="' + esc(mailto("First call: " + unitName(u))) + '">Get first call</a></div>' +
+        '</div></article>';
+    }).join("");
+  } else {
+    benchEl.hidden = true;
+    document.getElementById("bench-head").hidden = true;
+  }
+
+  /* ---------- past work ---------- */
+  var pastEl = document.getElementById("past-list");
+  if (sold.length){
+    pastEl.innerHTML = sold.map(function(u){
+      return '<li><span class="pm">' + esc(unitName(u)) + '</span><span class="ps">Sold</span><p>' + esc(u.summary) + '</p></li>';
+    }).join("");
+  } else {
+    document.getElementById("past").hidden = true;
+  }
+
+  /* ---------- parts ---------- */
+  var parts = (data.parts || []).filter(function(p){ return p.show !== false; });
+  var partsEl = document.getElementById("parts-list");
+  if (parts.length){
+    partsEl.innerHTML = parts.map(function(p){
+      var priced = p.price != null;
+      var btn = p.buyLink
+        ? '<a class="btn btn-primary btn-sm" href="' + esc(p.buyLink) + '" rel="noopener">Buy</a>'
+        : '<a class="btn btn-ghost btn-sm" href="' + esc(mailto("Parts: " + p.name)) + '">' + (priced ? "Order by email" : "Ask") + '</a>';
+      return '<article class="part">' +
+        (p.photo ? '<img src="' + esc(p.photo) + '" alt="' + esc(p.name) + '" loading="lazy">' : "") +
+        '<h3>' + esc(p.name) + '</h3>' +
+        (p.options ? '<p class="opts">' + esc(p.options) + '</p>' : "") +
+        '<p>' + esc(p.detail) + '</p>' +
+        '<div class="part-foot">' +
+          (priced ? '<span class="price">' + money(p.price) + '</span>' : '<span class="price ask">Ask for price</span>') +
+          btn +
+        '</div></article>';
+    }).join("");
+  } else {
+    document.getElementById("parts").hidden = true;
+    document.getElementById("nav-parts").parentNode.hidden = true;
+  }
+
+  /* ---------- about photo ---------- */
+  if (cfg.aboutPhoto){
+    var fig = document.getElementById("about-photo");
+    fig.innerHTML = '<img src="' + esc(cfg.aboutPhoto) + '" alt="The Hi-Fi Hopes workbench" loading="lazy">';
+    fig.hidden = false;
+  } else {
+    document.getElementById("about-grid").classList.add("no-photo");
+  }
+
+  /* ---------- contact ---------- */
+  var rows = [];
+  if (cfg.phone) rows.push(["Call or text", '<a href="' + esc(telHref(cfg.phone)) + '">' + esc(cfg.phone) + '</a>']);
+  rows.push(["Email", '<a href="mailto:' + esc(email) + '">' + esc(email) + '</a>']);
+  rows.push(["Shop", "Paulding, Ohio · pickup and drop-off by appointment"]);
+  rows.push(["Languages", "English · Español"]);
+  if (cfg.reviewsUrl) rows.push(["Reviews", '<a href="' + esc(cfg.reviewsUrl) + '" rel="noopener">Read reviews on Google</a>']);
+  var mk = (cfg.marketplaces || []).map(function(m){
+    return m.url ? '<a href="' + esc(m.url) + '" rel="noopener">' + esc(m.name) + '</a>' : esc(m.name);
+  });
+  if (mk.length) rows.push(["Also on", mk.join('<span class="sep">·</span>')]);
+  document.getElementById("contact-sheet").innerHTML = rows.map(function(r){
+    return '<div class="spec-row"><span class="spec-key">' + r[0] + '</span><span class="spec-val">' + r[1] + '</span></div>';
+  }).join("");
+
+  /* ---------- policies ---------- */
+  var pol = (cfg.policies || []).filter(function(p){ return p.text; });
+  if (pol.length){
+    document.getElementById("policy-list").innerHTML = pol.map(function(p){
+      return '<div class="policy"><h3>' + esc(p.title) + '</h3><p>' + esc(p.text) + '</p></div>';
+    }).join("");
+  } else {
+    document.getElementById("policies").hidden = true;
+  }
+
+  /* ---------- repair form ---------- */
+  var form = document.getElementById("repair-form");
+  var statusEl = document.getElementById("form-status");
+  var submitBtn = document.getElementById("r-submit");
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+
+  function showStatus(html, isError){
+    statusEl.innerHTML = html;
+    statusEl.classList.toggle("is-error", !!isError);
+    statusEl.hidden = false;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var missing = ["r-name","r-contact","r-model","r-problem"].filter(function(id){ return !val(id); });
+    if (missing.length){
+      showStatus("Fill in your name, how to reach you, the model and what it's doing, then send again.", true);
+      document.getElementById(missing[0]).focus();
+      return;
+    }
+    var model = val("r-model");
+    var body =
+      "Name: " + val("r-name") + "\n" +
+      "Reach me at: " + val("r-contact") + "\n" +
+      "Make and model: " + model + "\n" +
+      "Last used: " + val("r-history") + "\n" +
+      "Getting it there: " + val("r-dropoff") + "\n\n" +
+      "What it's doing:\n" + val("r-problem") + "\n";
+
+    if (cfg.formEndpoint){
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      fetch(cfg.formEndpoint, {method:"POST", headers:{"Accept":"application/json"}, body:new FormData(form)})
+        .then(function(r){
+          if (!r.ok) throw new Error("bad status");
+          form.reset();
+          showStatus("Got it. I'll get back to you about the " + esc(model) + " within a day or two.");
+        })
+        .catch(function(){
+          showStatus("That didn't go through. Email the details to <a href=\"mailto:" + esc(email) + "\">" + esc(email) + "</a> instead.", true);
+        })
+        .then(function(){ submitBtn.disabled = false; submitBtn.textContent = "Send repair request"; });
+      return;
+    }
+
+    // No form service set up: open the customer's email app with everything filled in.
+    window.location.href = mailto("Repair request: " + model, body);
+    showStatus(
+      "<span>Your email app should open with this filled in. Attach photos if you have them. If nothing opened, copy this and send it to <strong>" + esc(email) + "</strong>.</span>" +
+      '<textarea id="r-copy" readonly>' + esc(body) + "</textarea>" +
+      '<button class="btn btn-ghost btn-sm" type="button" id="r-copy-btn">Copy request</button>'
+    );
+    document.getElementById("r-copy-btn").addEventListener("click", function(){
+      var ta = document.getElementById("r-copy");
+      var btn = this;
+      function done(){ btn.textContent = "Copied"; }
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(done, function(){ ta.select(); });
+      } else { ta.select(); }
+    });
+  });
+
+  /* ---------- mobile nav ---------- */
+  var toggle = document.getElementById("nav-toggle");
+  var nav = document.getElementById("site-nav");
+  toggle.addEventListener("click", function(){
+    var open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.textContent = open ? "Close" : "Menu";
+  });
+  nav.addEventListener("click", function(e){
+    if (e.target.tagName === "A"){
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "Menu";
+    }
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
 </body>
 </html>
