@@ -9,7 +9,7 @@ window.HFH = {
 
   /* ---------------- SHOP SETTINGS ---------------- */
   config: {
-    email: "hello@hifihopes.com",
+    email: "dan@hifihopes.com",
 
     // Google Voice number, like "(419) 555-0123". Leave "" to hide it.
     phone: "",
