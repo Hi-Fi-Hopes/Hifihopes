@@ -141,3 +141,9 @@ To get submissions straight to your inbox instead:
 
 Fill in **Warranty** and **Returns** before taking online payments.
 A policy with empty text `""` is hidden on the site.
+
+## Recap kits
+
+The made-to-order recap kit box under Parts is on by default.
+To hide it, set `recapKits: false` at the top of `site-data.js`.
+Kit requests arrive by email with the subject "Recap kit quote: <model>".
