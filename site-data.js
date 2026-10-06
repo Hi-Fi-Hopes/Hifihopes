@@ -21,6 +21,9 @@ window.HFH = {
     // Leave "" and the form opens the customer's email app instead.
     formEndpoint: "",
 
+    // Show the made-to-order recap kit section under Parts. false hides it.
+    recapKits: true,
+
     // Photo of your bench for the About section, like "images/bench.jpg".
     // Leave "" to hide the photo box.
     aboutPhoto: "images/bench.jpg",
@@ -169,18 +172,8 @@ window.HFH = {
       id: "led-dial-bulbs",
       show: true,
       name: "Warm-white LED dial and meter bulbs",
-      detail: "Drop-in LED replacements for incandescent dial and meter lamps. Grain-of-wheat and wired 3mm/5mm styles.",
+      detail: "Drop-in LED replacements for incandescent dial and meter lamps. Grain-of-wheat, wired 3mm/5mm, and fuse-style.",
       options: "6V · 8V · 12V · 14V",
-      price: null,
-      buyLink: "",
-      photo: ""
-    },
-    {
-      id: "meter-lamp-grommets",
-      show: true,
-      name: "Meter lamp grommets",
-      detail: "Replacement rubber grommets for meter lamps. Fits the Sansui 881 and similar models. Ask to confirm fit for yours.",
-      options: "",
       price: null,
       buyLink: "",
       photo: ""
