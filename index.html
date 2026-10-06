@@ -784,7 +784,8 @@
       var actions = [];
       if (u.buyLink) actions.push('<a class="btn btn-primary btn-sm" href="' + esc(u.buyLink) + '" rel="noopener">Buy now</a>');
       if (u.depositLink) actions.push('<a class="btn ' + (u.buyLink ? "btn-ghost" : "btn-primary") + ' btn-sm" href="' + esc(u.depositLink) + '" rel="noopener">Reserve' + (u.deposit ? " · " + money(u.deposit) + " deposit" : "") + '</a>');
-      actions.push('<a class="btn btn-ghost btn-sm" href="' + esc(mailto("Question about the " + unitName(u))) + '">Ask a question</a>');
+      if (cfg.phone) actions.push('<a class="btn ' + (actions.length ? "btn-ghost" : "btn-primary") + ' btn-sm" href="' + esc(telHref(cfg.phone)) + '">Call or text</a>');
+      actions.push('<a class="btn btn-ghost btn-sm" href="' + esc(mailto("Question about the " + unitName(u))) + '">Email</a>');
       return '<article class="card">' +
         photoBlock(u, "is-sale", "For sale") +
         '<div class="card-body">' +

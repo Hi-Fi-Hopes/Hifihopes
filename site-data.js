@@ -63,17 +63,20 @@ window.HFH = {
       id: "pioneer-sa-9500ii",
       brand: "Pioneer",
       model: "SA-9500II",
-      status: "bench",
-      headline: "Integrated amplifier, final checks",
-      summary: "Pioneer's top integrated amp of its series. Ask for first call before it's listed.",
-      price: null, buyLink: "", depositLink: "", deposit: null,
+      status: "for-sale",
+      headline: "Integrated amplifier, new power supply caps",
+      summary: "Clean brushed-aluminum faceplate. Main power supply filter capacitors replaced.",
+      price: 1100, buyLink: "", depositLink: "", deposit: null,
       photos: [
         "images/pioneer-sa-9500ii-front.jpg",
         "images/pioneer-sa-9500ii-left.jpg",
         "images/pioneer-sa-9500ii-right.jpg",
-        "images/pioneer-sa-9500ii-detail.jpg"
+        "images/pioneer-sa-9500ii-detail.jpg",
+        "images/bench.jpg"
       ],
-      service: []
+      service: [
+        "Main power supply filter capacitors (4): replaced with new"
+      ]
     },
     {
       id: "kenwood-eleven-iii",
