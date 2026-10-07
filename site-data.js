@@ -210,6 +210,28 @@ window.HFH = {
       price: null, buyLink: "", depositLink: "", deposit: null,
       photos: ["images/kenwood-kr-4070.jpg"],
       service: []
+    },
+    {
+      id: "sansui-7070-sold",
+      brand: "Sansui",
+      model: "7070",
+      status: "sold",
+      headline: "Cleaned and calibrated",
+      summary: "Cleaned and calibrated, then sold.",
+      price: null, buyLink: "", depositLink: "", deposit: null,
+      photos: ["images/sansui-7070-sold.jpg"],
+      service: []
+    },
+    {
+      id: "sansui-5900z",
+      brand: "Sansui",
+      model: "5900Z",
+      status: "sold",
+      headline: "Cleaned and calibrated",
+      summary: "Cleaned and calibrated, then sold.",
+      price: null, buyLink: "", depositLink: "", deposit: null,
+      photos: ["images/sansui-5900z.jpg"],
+      service: []
     }
   ],
 
