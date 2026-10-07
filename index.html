@@ -364,11 +364,20 @@
   .sheet summary::-webkit-details-marker{display:none;}
   .sheet summary::after{content:"+"; color:var(--glow); font-size:1rem;}
   .sheet[open] summary::after{content:"–";}
-  .sheet ul{list-style:none; padding:0 0.85rem 0.75rem;}
-  .sheet li{
-    font-family:var(--f-mono); font-size:0.8rem; color:var(--aluminum);
-    padding:0.45rem 0; border-top:1px dashed var(--line);
+  .sheet-body{padding:0 0.85rem 0.85rem; display:grid; gap:0.85rem;}
+  .sheet-meta{display:flex; justify-content:space-between; gap:0.75rem; flex-wrap:wrap; font-family:var(--f-mono); font-size:0.72rem; color:var(--aluminum-dim); border-top:1px dashed var(--line); padding-top:0.6rem;}
+  .sheet-group h4{margin:0 0 0.3rem; font-family:var(--f-display); font-weight:500; font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--glow);}
+  .sheet-group ul{list-style:none; padding:0; margin:0;}
+  .sheet-group li{
+    display:grid; grid-template-columns:minmax(0,1fr) auto; gap:0.15rem 0.75rem; align-items:baseline;
+    font-family:var(--f-mono); font-size:0.78rem; color:var(--aluminum);
+    padding:0.4rem 0; border-top:1px dashed var(--line);
   }
+  .sheet-group li:first-child{border-top:none;}
+  .sheet-group .res{color:var(--paper); text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .sheet-group .res.ok{color:var(--ok);}
+  .sheet-group .sheet-spec{grid-column:1 / -1; color:var(--aluminum-dim); font-size:0.7rem;}
+  .sheet-note{font-size:0.85rem; color:var(--aluminum-dim); border-top:1px dashed var(--line); padding-top:0.6rem;}
   .card-actions{display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:auto; padding-top:0.5rem;}
   .card-note{font-size:0.82rem; color:var(--aluminum-dim);}
 
@@ -880,11 +889,37 @@
     return '<div class="card-photo">' + inner + '<span class="status ' + statusClass + '">' + statusText + '</span></div>';
   }
 
+  // Service sheet. Accepts a simple list of lines, or a structured sheet:
+  // { date, hours, groups: [{ title, items: ["text" | {task, result, spec}] }], notes }
   function serviceSheet(u){
-    if (!u.service || !u.service.length) return "";
-    return '<details class="sheet"><summary>Service sheet</summary><ul>' +
-      u.service.map(function(s){ return "<li>" + esc(s) + "</li>"; }).join("") +
-      "</ul></details>";
+    var sv = u.service;
+    if (!sv) return "";
+    if (Array.isArray(sv)){
+      if (!sv.length) return "";
+      sv = {groups:[{title:"Work done", items:sv}]};
+    }
+    var groups = (sv.groups || []).filter(function(g){ return g.items && g.items.length; });
+    if (!groups.length) return "";
+    var count = groups.reduce(function(n, g){ return n + g.items.length; }, 0);
+    var html = groups.map(function(g){
+      return '<div class="sheet-group"><h4>' + esc(g.title) + '</h4><ul>' + g.items.map(function(it){
+        if (typeof it === "string") return '<li><span>' + esc(it) + '</span></li>';
+        var res = it.result || "";
+        var okCls = /^(pass|ok|done|replaced|cleaned|lubricated|tested|set to spec)\b/i.test(res) ? " ok" : "";
+        return '<li><span>' + esc(it.task) + '</span>' +
+          (res ? '<span class="res' + okCls + '">' + esc(res) + '</span>' : '') +
+          (it.spec ? '<span class="sheet-spec">Spec: ' + esc(it.spec) + '</span>' : '') + '</li>';
+      }).join("") + '</ul></div>';
+    }).join("");
+    var meta = [];
+    if (sv.date) meta.push("Serviced " + esc(sv.date));
+    if (sv.hours) meta.push("Soak test " + esc(sv.hours));
+    meta.push(count + " items");
+    return '<details class="sheet"><summary>Service sheet</summary><div class="sheet-body">' +
+      html +
+      (sv.notes ? '<p class="sheet-note">' + esc(sv.notes) + '</p>' : '') +
+      '<div class="sheet-meta">' + meta.map(function(m){ return "<span>" + m + "</span>"; }).join("") + '</div>' +
+      '</div></details>';
   }
 
   /* ---------- for sale ---------- */

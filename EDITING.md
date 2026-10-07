@@ -35,19 +35,35 @@ status: "for-sale",
 price: 1150,
 ```
 
-Then fill in `service` with the service sheet, one line per item:
+Then fill in the service sheet. Group the work, and put measured values in `result`:
 
 ```js
-service: [
-  "Bias set to spec, both channels",
-  "DC offset under 10mV, both channels",
-  "Main filter caps: Nichicon 80V 10,000µF, replaced",
-  "Dial and meter lamps: warm-white LED",
-  "All switches and pots cleaned with DeoxIT D5"
-]
+service: {
+  date: "Oct 2026",
+  hours: "48 hours",            // soak test length
+  groups: [
+    { title: "Cleaning", items: [
+      { task: "Volume, balance and tone pots", result: "Cleaned" },
+      { task: "Speaker relay contacts", result: "Cleaned" }
+    ]},
+    { title: "Capacitors", items: [
+      { task: "Electrolytics ESR-screened", result: "38 of 41 in spec" },
+      { task: "Main filter capacitors (4)", result: "Replaced, new" }
+    ]},
+    { title: "Calibration", items: [
+      { task: "Idle bias, left", result: "20.1 mV", spec: "20 mV" },
+      { task: "DC offset, left", result: "3 mV", spec: "under 10 mV" }
+    ]},
+    { title: "Testing", items: [
+      { task: "All inputs and outputs", result: "Pass" }
+    ]}
+  ],
+  notes: "Light wear on the top cover."
+},
 ```
 
-Use your real numbers. The service sheet is what makes your units worth more than an eBay flip.
+Use your real numbers. Results starting with Pass, OK, Done, Replaced, Cleaned or Tested show in green.
+The service sheet is what makes your units worth more than an eBay flip.
 
 ## Mark something sold
 

@@ -68,7 +68,7 @@ window.HFH = {
      photos:       list of photos, first one is the main picture:
                    ["images/one.jpg", "images/two.jpg"]
                    Leave as [] to show a nameplate instead.
-     service:      the service sheet, one line per item of work.
+     service:      the service sheet. See EDITING.md, "Service sheets".
   ------------------------------------------- */
   units: [
     {
@@ -77,7 +77,7 @@ window.HFH = {
       model: "SA-9500II",
       status: "for-sale",
       headline: "Integrated amplifier, new power supply caps",
-      summary: "Clean brushed-aluminum faceplate. Main power supply filter capacitors replaced.",
+      summary: "Great cosmetic shape. New power supply caps, controls cleaned and lubricated, bias and offset set, 3-hour soak test.",
       price: 1100, buyLink: "", depositLink: "", deposit: null,
       photos: [
         "images/pioneer-sa-9500ii-front.jpg",
@@ -86,9 +86,29 @@ window.HFH = {
         "images/pioneer-sa-9500ii-detail.jpg",
         "images/bench.jpg"
       ],
-      service: [
-        "Main power supply filter capacitors (4): replaced with new"
-      ]
+      service: {
+        date: "",
+        hours: "",
+        groups: [
+          { title: "Cleaning", items: [
+            { task: "All switches and contacts", result: "Cleaned, DeoxIT D5" },
+            { task: "Controls, where appropriate", result: "Lubricated, DeoxIT F5" },
+            { task: "General cleaning", result: "Done, 99.9% isopropyl" }
+          ]},
+          { title: "Capacitors", items: [
+            { task: "Main power supply filter capacitors (4)", result: "Replaced, new" }
+          ]},
+          { title: "Calibration", items: [
+            { task: "Idle bias, both channels", result: "Set to spec" },
+            { task: "DC offset, both channels", result: "Under 5 mV" }
+          ]},
+          { title: "Testing", items: [
+            { task: "Full function test", result: "Pass" },
+            { task: "Soak test", result: "3 hours" }
+          ]}
+        ],
+        notes: "In great cosmetic shape."
+      }
     },
     {
       id: "kenwood-eleven-iii",
