@@ -905,7 +905,7 @@
       return '<div class="sheet-group"><h4>' + esc(g.title) + '</h4><ul>' + g.items.map(function(it){
         if (typeof it === "string") return '<li><span>' + esc(it) + '</span></li>';
         var res = it.result || "";
-        var okCls = /^(pass|ok|done|replaced|cleaned|tested)\b/i.test(res) ? " ok" : "";
+        var okCls = /^(pass|ok|done|replaced|cleaned|lubricated|tested|set to spec)\b/i.test(res) ? " ok" : "";
         return '<li><span>' + esc(it.task) + '</span>' +
           (res ? '<span class="res' + okCls + '">' + esc(res) + '</span>' : '') +
           (it.spec ? '<span class="sheet-spec">Spec: ' + esc(it.spec) + '</span>' : '') + '</li>';
