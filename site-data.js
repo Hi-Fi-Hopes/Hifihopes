@@ -68,7 +68,7 @@ window.HFH = {
      photos:       list of photos, first one is the main picture:
                    ["images/one.jpg", "images/two.jpg"]
                    Leave as [] to show a nameplate instead.
-     service:      the service sheet, one line per item of work.
+     service:      the service sheet. See EDITING.md, "Service sheets".
   ------------------------------------------- */
   units: [
     {
@@ -86,9 +86,16 @@ window.HFH = {
         "images/pioneer-sa-9500ii-detail.jpg",
         "images/bench.jpg"
       ],
-      service: [
-        "Main power supply filter capacitors (4): replaced with new"
-      ]
+      service: {
+        date: "",
+        hours: "",
+        groups: [
+          { title: "Power supply", items: [
+            { task: "Main filter capacitors (4)", result: "Replaced, new" }
+          ]}
+        ],
+        notes: ""
+      }
     },
     {
       id: "kenwood-eleven-iii",
