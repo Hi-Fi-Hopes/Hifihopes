@@ -164,7 +164,7 @@ window.HFH = {
       headline: "Full service",
       summary: "Bias and offset set to spec, warm-white LED dial lighting, recap, contacts cleaned.",
       price: null, buyLink: "", depositLink: "", deposit: null,
-      photos: [],
+      photos: ["images/marantz-2238b.jpg"],
       service: []
     },
     {
@@ -187,6 +187,28 @@ window.HFH = {
       summary: "Went to a local buyer in October 2026.",
       price: null, buyLink: "", depositLink: "", deposit: null,
       photos: ["images/mcs-3253.jpg"],
+      service: []
+    },
+    {
+      id: "pioneer-sx-3700",
+      brand: "Pioneer",
+      model: "SX-3700",
+      status: "sold",
+      headline: "Cleaned and calibrated",
+      summary: "Cleaned and calibrated, then sold.",
+      price: null, buyLink: "", depositLink: "", deposit: null,
+      photos: ["images/pioneer-sx-3700.jpg"],
+      service: []
+    },
+    {
+      id: "kenwood-kr-4070",
+      brand: "Kenwood",
+      model: "KR-4070",
+      status: "sold",
+      headline: "Cleaned and calibrated",
+      summary: "Cleaned and calibrated, then sold.",
+      price: null, buyLink: "", depositLink: "", deposit: null,
+      photos: ["images/kenwood-kr-4070.jpg"],
       service: []
     }
   ],
