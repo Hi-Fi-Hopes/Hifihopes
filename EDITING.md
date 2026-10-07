@@ -128,14 +128,34 @@ At the top of `site-data.js`:
 - `reviewsUrl`: In Google Maps, find your business, tap **Share**, copy the link
 - `marketplaces`: paste your store or profile links to make the names clickable
 
-## Repair form
+## Email addresses
 
-Right now the form opens the customer's email app with everything filled in.
-To get submissions straight to your inbox instead:
+Set in `emails` at the top of `site-data.js`:
+- `service`: repair request form, repair questions
+- `sales`: buy/ask buttons, first-call lists, parts, recap kits
+- `hello`: everything else (shown in Contact)
 
-1. Sign up at formspree.io (free tier available) with hifihopes@gmail.com
-2. Create a form, copy its endpoint (looks like `https://formspree.io/f/abcdwxyz`)
-3. Paste it into `formEndpoint`
+## Forms (send straight to your inbox)
+
+Without setup, the repair and recap kit forms open the customer's own email app.
+To have them send directly to you instead, use Web3Forms (free up to 250 messages a month):
+
+1. Go to web3forms.com
+2. Enter **service@hifihopes.com** and click **Create Access Key**
+3. Open the email Web3Forms sends to service@ and copy the access key
+4. Repeat steps 2–3 with **sales@hifihopes.com**
+5. In `site-data.js`, paste the keys into `formKeys`:
+   ```js
+   formKeys: {
+     service: "paste-the-service-key-here",
+     sales:   "paste-the-sales-key-here"
+   },
+   ```
+6. Commit, wait a minute, then send yourself a test from each form
+
+The keys are visible in the page source. That's normal for Web3Forms: a key can only send to the address it was created for.
+
+The free plan doesn't take file uploads, so the repair form asks people to text photos to your shop number.
 
 ## Policies
 

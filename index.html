@@ -24,7 +24,7 @@
   "@type": "LocalBusiness",
   "name": "Hi-Fi Hopes, LLC",
   "url": "https://hifihopes.com/",
-  "email": "dan@hifihopes.com",
+  "email": "hello@hifihopes.com",
   "telephone": "+1-419-669-6277",
   "description": "Vintage hi-fi repair, restoration and sales, specializing in 1970s silverface.",
   "image": "https://hifihopes.com/og-image.png",
@@ -435,6 +435,8 @@
   .form-status.is-error{border-left-color:var(--signal);}
   .form-status textarea{width:100%; min-height:8rem; font-family:var(--f-mono); font-size:0.8rem; background:#120b07; color:var(--aluminum); border:1px solid var(--line); border-radius:3px; padding:0.6rem;}
 
+  .hp{position:absolute !important; left:-9999px !important; width:1px; height:1px; opacity:0;}
+
   /* ---------- PARTS ---------- */
   .parts{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:1rem;}
   .part p{max-width:70ch;}
@@ -656,9 +658,13 @@
             <input id="r-name" name="name" autocomplete="name" required>
           </div>
           <div class="field">
-            <label for="r-contact">Email or phone</label>
-            <input id="r-contact" name="contact" autocomplete="email" required>
+            <label for="r-email">Email</label>
+            <input id="r-email" name="email" type="email" autocomplete="email" inputmode="email">
           </div>
+        </div>
+        <div class="field">
+          <label for="r-phone">Phone (if you'd rather call or text)</label>
+          <input id="r-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
         </div>
         <div class="field">
           <label for="r-model">Make and model</label>
@@ -687,6 +693,7 @@
             </select>
           </div>
         </div>
+        <input class="hp" type="checkbox" name="botcheck" id="r-bot" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn btn-primary" type="submit" id="r-submit">Send repair request</button>
         <div class="form-status" id="form-status" role="status" hidden></div>
       </form>
@@ -718,6 +725,14 @@
       </div>
       <form id="kit-form" novalidate>
         <div class="field">
+          <label for="k-name">Your name</label>
+          <input id="k-name" name="name" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="k-email">Email</label>
+          <input id="k-email" name="email" type="email" autocomplete="email" inputmode="email">
+        </div>
+        <div class="field">
           <label for="k-model">Make and model</label>
           <input id="k-model" name="model" placeholder="e.g. Marantz 2230" required>
         </div>
@@ -730,7 +745,12 @@
             <option>Not sure, help me decide</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">Request a kit quote</button>
+        <div class="field">
+          <label for="k-notes">Board numbers or notes (optional)</label>
+          <input id="k-notes" name="notes" placeholder="e.g. power supply and amp boards only">
+        </div>
+        <input class="hp" type="checkbox" name="botcheck" id="k-bot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-primary" type="submit" id="k-submit">Request a kit quote</button>
         <div class="form-status" id="kit-status" role="status" hidden></div>
       </form>
     </div>
@@ -810,7 +830,7 @@
 </footer>
 
 <noscript>
-  <p style="text-align:center;padding:1rem;color:#d3cec2;background:#1c110b;margin:0">Listings need JavaScript to load. Email <a href="mailto:dan@hifihopes.com">dan@hifihopes.com</a> for what's available.</p>
+  <p style="text-align:center;padding:1rem;color:#d3cec2;background:#1c110b;margin:0">Listings need JavaScript to load. Email <a href="mailto:sales@hifihopes.com">sales@hifihopes.com</a> for what's available.</p>
 </noscript>
 
 <script src="site-data.js"></script>
@@ -818,7 +838,13 @@
 (function(){
   var data = window.HFH || {config:{}, units:[], parts:[]};
   var cfg = data.config || {};
-  var email = cfg.email || "dan@hifihopes.com";
+  var emails = cfg.emails || {};
+  var addr = {
+    service: emails.service || "service@hifihopes.com",
+    sales:   emails.sales   || "sales@hifihopes.com",
+    hello:   emails.hello   || "hello@hifihopes.com"
+  };
+  var formKeys = cfg.formKeys || {};
 
   /* ---------- helpers ---------- */
   function esc(s){
@@ -829,8 +855,8 @@
   function money(n){
     return "$" + Number(n).toLocaleString("en-US", {minimumFractionDigits:0, maximumFractionDigits:2});
   }
-  function mailto(subject, body){
-    return "mailto:" + email + "?subject=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
+  function mailto(subject, body, kind){
+    return "mailto:" + addr[kind || "sales"] + "?subject=" + encodeURIComponent(subject) + (body ? "&body=" + encodeURIComponent(body) : "");
   }
   function telHref(p){ return "tel:" + String(p).replace(/[^\d+]/g, ""); }
   function unitName(u){ return u.brand + " " + u.model; }
@@ -961,19 +987,34 @@
   document.getElementById("kit-form").addEventListener("submit", function(e){
     e.preventDefault();
     var st = document.getElementById("kit-status");
-    var model = document.getElementById("k-model").value.trim();
-    if (!model){
-      st.textContent = "Enter the make and model so I can quote the right kit.";
-      st.classList.add("is-error"); st.hidden = false;
-      document.getElementById("k-model").focus();
+    var model = val("k-model"), em = val("k-email");
+    if (!model || !em){
+      showStatusIn(st, "Enter your email and the make and model so I can quote the right kit.", true);
+      document.getElementById(!em ? "k-email" : "k-model").focus();
       return;
     }
-    var scope = document.getElementById("k-scope").value;
-    window.location.href = mailto("Recap kit quote: " + model,
-      "Make and model: " + model + "\nWhat I need: " + scope + "\n\nBoard numbers or notes (optional): \n");
-    st.classList.remove("is-error");
-    st.innerHTML = "Your email app should open with this filled in. If nothing opened, email <strong>" + esc(email) + "</strong> with the model.";
-    st.hidden = false;
+    if (!looksLikeEmail(em)){
+      showStatusIn(st, "That email address doesn't look right. Check it and send again.", true);
+      document.getElementById("k-email").focus();
+      return;
+    }
+    sendForm({
+      kind: "sales",
+      form: this,
+      statusEl: st,
+      button: document.getElementById("k-submit"),
+      subject: "Recap kit quote: " + model,
+      name: val("k-name"),
+      replyTo: em,
+      fields: [
+        ["Name", val("k-name")],
+        ["Email", em],
+        ["Make and model", model],
+        ["What I need", val("k-scope")],
+        ["Board numbers or notes", val("k-notes")]
+      ],
+      okMsg: "Got it. I'll email you a quote for the " + model + " kit."
+    });
   });
 
   /* ---------- about photo ---------- */
@@ -988,7 +1029,10 @@
   /* ---------- contact ---------- */
   var rows = [];
   if (cfg.phone) rows.push(["Call or text", '<a href="' + esc(telHref(cfg.phone)) + '">' + esc(cfg.phone) + '</a>']);
-  rows.push(["Email", '<a href="mailto:' + esc(email) + '">' + esc(email) + '</a>']);
+  function mailLink(k){ return '<a href="mailto:' + esc(addr[k]) + '">' + esc(addr[k]) + '</a>'; }
+  rows.push(["Repairs &amp; restoration", mailLink("service")]);
+  rows.push(["Buying, selling, or looking for something", mailLink("sales")]);
+  rows.push(["Everything else", mailLink("hello")]);
   rows.push(["Shop", "Paulding, Ohio · pickup and drop-off by appointment"]);
   rows.push(["Languages", "English · Español"]);
   if (cfg.reviewsUrl) rows.push(["Reviews", '<a href="' + esc(cfg.reviewsUrl) + '" rel="noopener">Read reviews on Google</a>']);
@@ -1010,66 +1054,111 @@
     document.getElementById("policies").hidden = true;
   }
 
-  /* ---------- repair form ---------- */
+  /* ---------- forms ---------- */
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function looksLikeEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function showStatusIn(el, html, isError){
+    el.innerHTML = html;
+    el.classList.toggle("is-error", !!isError);
+    el.hidden = false;
+  }
+  function bodyText(fields){
+    return fields.filter(function(f){ return f[1]; }).map(function(f){
+      return f[1].indexOf("\n") > -1 ? f[0] + ":\n" + f[1] : f[0] + ": " + f[1];
+    }).join("\n") + "\n";
+  }
+
+  // Sends straight to the shop inbox through Web3Forms when an access key is set.
+  // Without a key, opens the customer's email app as a fallback.
+  function sendForm(o){
+    var to = addr[o.kind];
+    var body = bodyText(o.fields);
+    var key = formKeys[o.kind];
+    var bot = o.form.querySelector("[name=botcheck]");
+
+    if (key){
+      if (bot && bot.checked){ o.form.reset(); showStatusIn(o.statusEl, esc(o.okMsg)); return; }
+      var label = o.button.textContent;
+      o.button.disabled = true;
+      o.button.textContent = "Sending…";
+      var payload = {
+        access_key: key,
+        subject: o.subject,
+        from_name: (o.name || "Website visitor") + " via hifihopes.com"
+      };
+      if (o.replyTo) payload.email = o.replyTo;   // lets you hit Reply in your inbox
+      o.fields.forEach(function(f){ if (f[1] && f[0] !== "Email") payload[f[0]] = f[1]; });
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accept": "application/json"},
+        body: JSON.stringify(payload)
+      })
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          if (!j || !j.success) throw new Error("not sent");
+          o.form.reset();
+          showStatusIn(o.statusEl, esc(o.okMsg));
+        })
+        .catch(function(){
+          showStatusIn(o.statusEl, 'That didn\'t go through. Email the details to <a href="mailto:' + esc(to) + '">' + esc(to) + "</a> instead" + (cfg.phone ? ", or call or text " + esc(cfg.phone) : "") + ".", true);
+        })
+        .then(function(){ o.button.disabled = false; o.button.textContent = label; });
+      return;
+    }
+
+    window.location.href = mailto(o.subject, body, o.kind);
+    showStatusIn(o.statusEl,
+      "<span>Your email app should open with this filled in. If nothing opened, copy this and send it to <strong>" + esc(to) + "</strong>.</span>" +
+      '<textarea readonly class="copy-box">' + esc(body) + "</textarea>" +
+      '<button class="btn btn-ghost btn-sm copy-btn" type="button">Copy request</button>'
+    );
+    var cb = o.statusEl.querySelector(".copy-btn"), ta = o.statusEl.querySelector(".copy-box");
+    cb.addEventListener("click", function(){
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(function(){ cb.textContent = "Copied"; }, function(){ ta.select(); });
+      } else { ta.select(); }
+    });
+  }
+
   var form = document.getElementById("repair-form");
   var statusEl = document.getElementById("form-status");
-  var submitBtn = document.getElementById("r-submit");
-
-  function val(id){ return document.getElementById(id).value.trim(); }
-
-  function showStatus(html, isError){
-    statusEl.innerHTML = html;
-    statusEl.classList.toggle("is-error", !!isError);
-    statusEl.hidden = false;
+  if (cfg.phone){
+    document.getElementById("form-hint").textContent = "I reply within a day or two. Have photos? Text them to " + cfg.phone + " after you send this.";
   }
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
-    var missing = ["r-name","r-contact","r-model","r-problem"].filter(function(id){ return !val(id); });
-    if (missing.length){
-      showStatus("Fill in your name, how to reach you, the model and what it's doing, then send again.", true);
-      document.getElementById(missing[0]).focus();
+    var em = val("r-email"), ph = val("r-phone");
+    var missing = ["r-name","r-model","r-problem"].filter(function(id){ return !val(id); });
+    if (missing.length || (!em && !ph)){
+      showStatusIn(statusEl, "Fill in your name, an email or phone number, the model and what it's doing, then send again.", true);
+      document.getElementById(missing.length ? missing[0] : "r-email").focus();
+      return;
+    }
+    if (em && !looksLikeEmail(em)){
+      showStatusIn(statusEl, "That email address doesn't look right. Check it and send again.", true);
+      document.getElementById("r-email").focus();
       return;
     }
     var model = val("r-model");
-    var body =
-      "Name: " + val("r-name") + "\n" +
-      "Reach me at: " + val("r-contact") + "\n" +
-      "Make and model: " + model + "\n" +
-      "Last used: " + val("r-history") + "\n" +
-      "Getting it there: " + val("r-dropoff") + "\n\n" +
-      "What it's doing:\n" + val("r-problem") + "\n";
-
-    if (cfg.formEndpoint){
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
-      fetch(cfg.formEndpoint, {method:"POST", headers:{"Accept":"application/json"}, body:new FormData(form)})
-        .then(function(r){
-          if (!r.ok) throw new Error("bad status");
-          form.reset();
-          showStatus("Got it. I'll get back to you about the " + esc(model) + " within a day or two.");
-        })
-        .catch(function(){
-          showStatus("That didn't go through. Email the details to <a href=\"mailto:" + esc(email) + "\">" + esc(email) + "</a> instead.", true);
-        })
-        .then(function(){ submitBtn.disabled = false; submitBtn.textContent = "Send repair request"; });
-      return;
-    }
-
-    // No form service set up: open the customer's email app with everything filled in.
-    window.location.href = mailto("Repair request: " + model, body);
-    showStatus(
-      "<span>Your email app should open with this filled in. Attach photos if you have them. If nothing opened, copy this and send it to <strong>" + esc(email) + "</strong>.</span>" +
-      '<textarea id="r-copy" readonly>' + esc(body) + "</textarea>" +
-      '<button class="btn btn-ghost btn-sm" type="button" id="r-copy-btn">Copy request</button>'
-    );
-    document.getElementById("r-copy-btn").addEventListener("click", function(){
-      var ta = document.getElementById("r-copy");
-      var btn = this;
-      function done(){ btn.textContent = "Copied"; }
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(ta.value).then(done, function(){ ta.select(); });
-      } else { ta.select(); }
+    sendForm({
+      kind: "service",
+      form: form,
+      statusEl: statusEl,
+      button: document.getElementById("r-submit"),
+      subject: "Repair request: " + model,
+      name: val("r-name"),
+      replyTo: em,
+      fields: [
+        ["Name", val("r-name")],
+        ["Email", em],
+        ["Phone", ph],
+        ["Make and model", model],
+        ["Last used", val("r-history")],
+        ["Getting it here", val("r-dropoff")],
+        ["What it's doing", val("r-problem")]
+      ],
+      okMsg: "Got it. I'll get back to you about the " + model + " within a day or two."
     });
   });
 

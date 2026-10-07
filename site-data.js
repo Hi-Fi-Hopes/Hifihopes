@@ -9,7 +9,12 @@ window.HFH = {
 
   /* ---------------- SHOP SETTINGS ---------------- */
   config: {
-    email: "dan@hifihopes.com",
+    // Where each kind of message goes.
+    emails: {
+      service: "service@hifihopes.com",   // repair and restoration inquiries
+      sales:   "sales@hifihopes.com",     // buying, selling, "do you have X"
+      hello:   "hello@hifihopes.com"      // everything else
+    },
 
     // Google Voice number, like "(419) 555-0123". Leave "" to hide it.
     phone: "(419) 669-6277",
@@ -17,9 +22,13 @@ window.HFH = {
     // Link to your Google reviews. Leave "" to hide the reviews link.
     reviewsUrl: "",
 
-    // Optional: a Formspree form URL for the repair request form.
+    // Web3Forms access keys. With a key, the form sends straight to your inbox.
     // Leave "" and the form opens the customer's email app instead.
-    formEndpoint: "",
+    // See EDITING.md, "Forms", to get the keys.
+    formKeys: {
+      service: "",   // repair request form, delivers to service@
+      sales:   ""    // recap kit form, delivers to sales@
+    },
 
     // Show the made-to-order recap kit section under Parts. false hides it.
     recapKits: true,
