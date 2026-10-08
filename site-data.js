@@ -205,8 +205,8 @@ window.HFH = {
       brand: "Kenwood",
       model: "KR-4070",
       status: "sold",
-      headline: "Cleaned and calibrated",
-      summary: "Cleaned and calibrated, then sold.",
+      headline: "LED upgrade and calibration",
+      summary: "LED lighting upgrade, cleaned, and calibrated to spec, then sold.",
       price: null, buyLink: "", depositLink: "", deposit: null,
       photos: ["images/kenwood-kr-4070.jpg"],
       service: []
